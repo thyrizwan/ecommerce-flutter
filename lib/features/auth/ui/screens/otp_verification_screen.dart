@@ -113,7 +113,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               const SizedBox(width: 8),
                               RichText(
                                 text: TextSpan(
-                                  text: 'Time remaining: ',
+                                  text: 'Resend? Wait: ',
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.grey,
