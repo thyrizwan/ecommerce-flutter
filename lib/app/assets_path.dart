@@ -5,4 +5,6 @@ class AssetsPath {
   static const String _organisationImagePath = '$_imagePath/organisation';
   static const String appLogoSvg = '$_organisationImagePath/logo.svg';
   static const String navbarLogoSvg = '$_organisationImagePath/logo_nav.svg';
+
+  static const String itemImagePath = 'assets/images/product/item.png';
 }
