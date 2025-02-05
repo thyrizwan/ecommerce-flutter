@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/app_constant.dart';
+import 'package:ecommerce/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -17,9 +20,9 @@ class OtpVerificationScreen extends StatefulWidget {
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  int _secondsRemaining = 60;
+  int _secondsRemaining = AppConstants.resendOtpTimeoutSeconds;
   bool _enableResend = false;
-  Timer? _timer;
+  late Timer? _timer;
 
   @override
   void initState() {
@@ -99,7 +102,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   onPressed: _onOtpButtonPressed,
                   child: const Text('Next'),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 32),
                 Column(
                   children: [
                     !_enableResend
@@ -109,7 +112,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               Icon(
                                 Icons.access_time,
                                 color: Colors.grey,
-                              ), // Clock icon
+                              ),
                               const SizedBox(width: 8),
                               RichText(
                                 text: TextSpan(
@@ -122,7 +125,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                     TextSpan(
                                       text: '$_secondsRemaining seconds',
                                       style: TextStyle(
-                                        color: AppColors.darkColor,
+                                        color: AppColors.softColor,
                                       ),
                                     ),
                                   ],
@@ -134,17 +137,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             onPressed: _resendCode,
                             icon: Icon(
                               Icons.refresh,
-                              color: Colors.blue,
+                              color: AppColors.softColor,
                             ), // Refresh icon
                             label: Text(
                               'Resend Code',
                               style: TextStyle(
-                                color: Colors.blue,
+                                color: AppColors.softColor,
                               ),
                             ),
                           ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -156,12 +159,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   _onOtpButtonPressed() {
     if (_formKey.currentState!.validate()) {
       print('OTP: ${_otpController.text}');
+      Navigator.pushNamed(context, CompleteProfileScreen.name);
     }
   }
 
   void _resendCode() {
     setState(() {
-      _secondsRemaining = 60;
+      _secondsRemaining = AppConstants.resendOtpTimeoutSeconds;
       _enableResend = false;
     });
     _startTimer();

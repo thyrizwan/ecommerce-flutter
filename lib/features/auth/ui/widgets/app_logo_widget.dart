@@ -5,13 +5,22 @@ import 'package:flutter_svg/svg.dart';
 class AppLogoWidget extends StatelessWidget {
   const AppLogoWidget({
     super.key,
+    this.width,
+    this.height,
+    this.boxFit,
   });
+
+  final double? width;
+  final double? height;
+  final BoxFit? boxFit;
 
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       AssetsPath.appLogoSvg,
-      width: 100,
+      width: width??100,
+      height: height??100,
+      fit: boxFit?? BoxFit.scaleDown,
     );
   }
 }

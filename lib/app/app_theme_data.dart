@@ -59,6 +59,21 @@ class AppThemeData {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 16),
           )
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.snowyColor,
+          minimumSize: const Size.fromHeight(50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.snowyColor,
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+        )
       )
     );
   }
