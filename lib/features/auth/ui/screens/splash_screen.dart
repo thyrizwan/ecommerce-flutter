@@ -10,6 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  static const String name = "/";
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

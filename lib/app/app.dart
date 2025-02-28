@@ -5,8 +5,10 @@ import 'package:ecommerce/features/auth/ui/screens/email_verification_screen.dar
 import 'package:ecommerce/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce/features/auth/ui/screens/splash_screen.dart';
+import 'package:ecommerce/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
+import 'package:ecommerce/features/product/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,16 +23,64 @@ class TruShop extends StatelessWidget {
       // themeMode: ThemeMode.dark,
       initialBinding: ControllerBinder(),
       initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (context) => const SplashScreen(),
-        SignInScreen.name: (context) => const SignInScreen(),
-        EmailVerificationScreen.name: (context) =>
-            const EmailVerificationScreen(),
-        OtpVerificationScreen.name: (context) => const OtpVerificationScreen(),
-        CompleteProfileScreen.name: (context) => const CompleteProfileScreen(),
-        HomeScreen.name: (context) => const HomeScreen(),
-        MainBottomNavigationBarScreen.name : (context) => const MainBottomNavigationBarScreen(),
+      onGenerateRoute: (RouteSettings settings) {
+        // Widget widget = _myRouteMap(settings);
+        late Widget widget;
+        switch (settings.name) {
+          case SplashScreen.name:
+            widget = const SplashScreen();
+          case SignInScreen.name:
+            widget = const SignInScreen();
+          case EmailVerificationScreen.name:
+            widget = const EmailVerificationScreen();
+          case OtpVerificationScreen.name:
+            widget = const OtpVerificationScreen();
+          case CompleteProfileScreen.name:
+            widget = const CompleteProfileScreen();
+          case HomeScreen.name:
+            widget = const HomeScreen();
+          case MainBottomNavigationBarScreen.name:
+            widget = const MainBottomNavigationBarScreen();
+          case CategoryListScreen.name:
+            widget = const CategoryListScreen();
+          case ProductListScreen.name:
+            String name = settings.arguments as String;
+            widget = ProductListScreen(
+              categoryName: name,
+            );
+          default:
+            widget = const HomeScreen();
+        }
+        return MaterialPageRoute(builder: (ctx) {
+          return widget;
+        });
       },
     );
+  }
+
+  Widget _myRouteMap(settings) {
+    switch (settings.name) {
+      case SignInScreen.name:
+        return const SignInScreen();
+      case EmailVerificationScreen.name:
+        return const EmailVerificationScreen();
+      case OtpVerificationScreen.name:
+        return const OtpVerificationScreen();
+      case CompleteProfileScreen.name:
+        return const CompleteProfileScreen();
+      case HomeScreen.name:
+        return const HomeScreen();
+      case MainBottomNavigationBarScreen.name:
+        return const MainBottomNavigationBarScreen();
+      case CategoryListScreen.name:
+        return const CategoryListScreen();
+      case ProductListScreen.name:
+        String name = settings.arguments as String;
+        return ProductListScreen(
+          categoryName: name,
+        );
+      default:
+        return const HomeScreen();
+    }
   }
 }

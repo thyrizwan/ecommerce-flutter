@@ -1,14 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
+import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerce/features/home/ui/widgets/app_bar_icon_button.dart';
-import 'package:ecommerce/features/home/ui/widgets/category_item_widget.dart';
+import 'package:ecommerce/features/common/ui/widgets/category_item_widget.dart';
 import 'package:ecommerce/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:ecommerce/features/home/ui/widgets/home_section_header.dart';
-import 'package:ecommerce/features/home/ui/widgets/item_card.dart';
+import 'package:ecommerce/features/common/ui/widgets/item_card.dart';
 import 'package:ecommerce/features/home/ui/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               HomeSectionHeader(
                 title: 'Category',
-                onTap: () {},
+                onTap: () {
+                  Get.find<MainBottomNavBarController>().moveToCategory();
+                },
               ),
               const SizedBox(height: 8),
               SingleChildScrollView(
@@ -127,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       title: SvgPicture.asset(AssetsPath.navbarLogoSvg),
+      automaticallyImplyLeading:false,
       actions: [
         AppBarIconButton(
           icon: Icons.person,

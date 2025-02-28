@@ -17,13 +17,10 @@ class HomeSectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        // TextButton(
-        //   onPressed: () {},
-        //   child: Text('View All'),
-        // ),
-        Text('View All'),
+        // TextButton(onPressed: onTap, child: const Text('Test')),
+        GestureDetector(onTap: onTap, child: const Text('View All')),
       ],
     );
   }
