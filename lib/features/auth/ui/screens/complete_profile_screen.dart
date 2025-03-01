@@ -167,7 +167,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       print('City: ${_cityTEController.text}');
       print('Shipping Address: ${_shippingAddressTEController.text}');
     }
-
   }
 
   @override
