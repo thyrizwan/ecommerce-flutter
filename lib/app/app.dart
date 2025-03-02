@@ -8,6 +8,7 @@ import 'package:ecommerce/features/auth/ui/screens/splash_screen.dart';
 import 'package:ecommerce/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
+import 'package:ecommerce/features/product/ui/screens/product_details_screen.dart';
 import 'package:ecommerce/features/product/ui/screens/product_list_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/create_review_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
@@ -54,6 +55,9 @@ class TruShop extends StatelessWidget {
             widget = const ReviewScreen();
           case CreateReviewScreen.name:
             widget = const CreateReviewScreen();
+          case ProductDetailsScreen.name:
+            int productId = settings.arguments as int;
+            widget = ProductDetailsScreen(productId: productId);
           default:
             widget = const HomeScreen();
         }
