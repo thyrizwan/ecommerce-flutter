@@ -101,17 +101,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   onPressed: () {
                     // TODO: Create New Review
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Text(
-                    "Log In",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  child: Text("Submit Review"),
                 ),
               ),
             ],

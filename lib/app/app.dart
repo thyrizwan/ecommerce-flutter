@@ -12,6 +12,7 @@ import 'package:ecommerce/features/product/ui/screens/product_details_screen.dar
 import 'package:ecommerce/features/product/ui/screens/product_list_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/create_review_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
+import 'package:ecommerce/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,6 +59,8 @@ class TruShop extends StatelessWidget {
           case ProductDetailsScreen.name:
             int productId = settings.arguments as int;
             widget = ProductDetailsScreen(productId: productId);
+          case WishListScreen.name:
+              widget = const WishListScreen();
           default:
             widget = const HomeScreen();
         }
