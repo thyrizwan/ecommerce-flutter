@@ -6,4 +6,6 @@ class Urls {
   static String verifyOtpUrl = '$_baseUrl/auth/verify-otp';
 
   static String getProfileInfoUrl = '$_baseUrl/auth/profile';
+
+  static String getHomeBannerListUrl = '$_baseUrl/slides';
 }

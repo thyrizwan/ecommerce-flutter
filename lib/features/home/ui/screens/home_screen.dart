@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
+import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce/features/common/ui/widgets/category_item_widget.dart';
 import 'package:ecommerce/features/home/ui/widgets/home_carousel_slider.dart';
@@ -24,6 +26,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
+  final HomeBannerListController _homeBannerListController =
+      Get.find<HomeBannerListController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _homeBannerListController.getHomeBannerList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _searchBarController,
               ),
               const SizedBox(height: 16),
-              HomeCarouselSlider(),
+              GetBuilder<HomeBannerListController>(builder: (controller) {
+                if (controller.isInProgress) {
+                  return SizedBox(
+                    height: 150,
+                    child: MyLoadingIndicator(),
+                  );
+                }
+                return HomeCarouselSlider(bannerList: controller.bannerList);
+              }),
               const SizedBox(height: 8),
               HomeSectionHeader(
                 title: 'Category',
@@ -131,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       title: SvgPicture.asset(AssetsPath.navbarLogoSvg),
-      automaticallyImplyLeading:false,
+      automaticallyImplyLeading: false,
       actions: [
         AppBarIconButton(
           icon: Icons.person,

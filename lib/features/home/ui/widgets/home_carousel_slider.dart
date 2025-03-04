@@ -1,24 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/features/home/data/model/banner_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
   const HomeCarouselSlider({
     super.key,
+    required this.bannerList,
   });
 
+  final List<BannerModel> bannerList;
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
 }
 
 class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
-  late List<int> _myList = [];
 
   @override
   void initState() {
     super.initState();
-    _myList = [1, 2, 3];
   }
 
   @override
@@ -35,23 +36,36 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
               }),
-          items: _myList.map((i) {
+          items: widget.bannerList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.snowyColor,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Carousel $i',
-                      style: TextStyle(fontSize: 16.0),
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: AppColors.snowyColor,
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                  ),
-                );
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Image clicked!");
+                        print(banner.sId);
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.network(
+                                banner.photoUrl ?? '',
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ));
               },
             );
           }).toList(),
@@ -63,7 +77,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < _myList.length; i++)
+                for (int i = 0; i < widget.bannerList.length; i++)
                   Container(
                     width: 10,
                     height: 10,
@@ -85,7 +99,6 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
 
   @override
   void dispose() {
-    _myList;
     super.dispose();
   }
 }
