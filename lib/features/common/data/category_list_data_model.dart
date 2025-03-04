@@ -1,7 +1,7 @@
-import 'package:ecommerce/features/home/data/model/category_list_model.dart';
+import 'package:ecommerce/features/common/data/category_list_model.dart';
 
 class CategoryListDataModel {
-  List<CategoryListModel>? results;
+  List<CategoryListModel>? categoryList;
   int? total;
   Null firstPage;
   Null previous;
@@ -9,7 +9,7 @@ class CategoryListDataModel {
   int? lastPage;
 
   CategoryListDataModel(
-      {this.results,
+      {this.categoryList,
       this.total,
       this.firstPage,
       this.previous,
@@ -18,9 +18,9 @@ class CategoryListDataModel {
 
   CategoryListDataModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <CategoryListModel>[];
+      categoryList = <CategoryListModel>[];
       json['results'].forEach((v) {
-        results!.add(CategoryListModel.fromJson(v));
+        categoryList!.add(CategoryListModel.fromJson(v));
       });
     }
     total = json['total'];
@@ -32,8 +32,8 @@ class CategoryListDataModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+    if (categoryList != null) {
+      data['results'] = categoryList!.map((v) => v.toJson()).toList();
     }
     data['total'] = total;
     data['first_page'] = firstPage;

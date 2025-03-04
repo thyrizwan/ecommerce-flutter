@@ -1,6 +1,8 @@
 import 'package:ecommerce/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerce/features/category/ui/screens/category_list_screen.dart';
+import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:ecommerce/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,22 @@ class MainBottomNavigationBarScreen extends StatefulWidget {
 
 class _MainBottomNavigationBarScreenState
     extends State<MainBottomNavigationBarScreen> {
+  final HomeBannerListController _homeBannerListController =
+  Get.find<HomeBannerListController>();
+
   final List<Widget> _screens = const [
     HomeScreen(),
     CategoryListScreen(),
     CartListScreen(),
     WishListScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _homeBannerListController.getHomeBannerList();
+    Get.find<CategoryListController>().getCategoryList();
+  }
 
   @override
   Widget build(BuildContext context) {

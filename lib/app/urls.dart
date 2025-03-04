@@ -8,4 +8,5 @@ class Urls {
   static String getProfileInfoUrl = '$_baseUrl/auth/profile';
 
   static String getHomeBannerListUrl = '$_baseUrl/slides';
+  static String getCategoryListUrl = '$_baseUrl/categories';
 }

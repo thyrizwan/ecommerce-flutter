@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
+import 'package:ecommerce/features/common/data/category_list_model.dart';
+import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
@@ -26,14 +28,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
-  final HomeBannerListController _homeBannerListController =
-      Get.find<HomeBannerListController>();
-
-  @override
-  void initState() {
-    super.initState();
-    _homeBannerListController.getHomeBannerList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               const SizedBox(height: 8),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _getCategoryList(),
-                ),
-              ),
+              GetBuilder<CategoryListController>(builder: (controller) {
+                if (controller.isInProgress) {
+                  return SizedBox(
+                    height: 80,
+                    child: MyLoadingIndicator(),
+                  );
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _getCategoryList(controller.categoryList),
+                  ),
+                );
+              }),
               const SizedBox(height: 16),
               HomeSectionHeader(
                 title: 'Popular',
@@ -125,12 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> _getCategoryList() {
+  List<Widget> _getCategoryList(List<CategoryListModel> categoryModel) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < categoryModel.length; i++) {
       categoryList.add(Padding(
         padding: const EdgeInsets.only(right: 12.0),
-        child: CategoryItemWidget(),
+        child: CategoryItemWidget(categoryListModel: categoryModel[i]),
       ));
     }
     return categoryList;

@@ -1,5 +1,4 @@
 import 'package:ecommerce/features/home/data/model/banner_list_data_model.dart';
-import 'package:ecommerce/features/home/data/model/banner_list_model.dart';
 
 class BannerListResponseModel {
   int? code;
@@ -21,8 +20,8 @@ class BannerListResponseModel {
     data['code'] = code;
     data['status'] = status;
     data['msg'] = msg;
-    if (this.bannerListDataModel != null) {
-      data['data'] = this.bannerListDataModel!.toJson();
+    if (bannerListDataModel != null) {
+      data['data'] = bannerListDataModel!.toJson();
     }
     return data;
   }

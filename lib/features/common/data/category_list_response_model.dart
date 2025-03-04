@@ -1,18 +1,18 @@
-import 'package:ecommerce/features/home/data/model/category_list_data_model.dart';
+import 'package:ecommerce/features/common/data/category_list_data_model.dart';
 
 class CategoryListResponseModel {
   int? code;
   String? status;
   String? msg;
-  CategoryListDataModel? data;
+  CategoryListDataModel? categoryListDataModel;
 
-  CategoryListResponseModel({this.code, this.status, this.msg, this.data});
+  CategoryListResponseModel({this.code, this.status, this.msg, this.categoryListDataModel});
 
   CategoryListResponseModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    data = json['data'] != null
+    categoryListDataModel = json['data'] != null
         ? CategoryListDataModel.fromJson(json['data'])
         : null;
   }
@@ -22,8 +22,8 @@ class CategoryListResponseModel {
     data['code'] = code;
     data['status'] = status;
     data['msg'] = msg;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
+    if (this.categoryListDataModel != null) {
+      data['data'] = this.categoryListDataModel!.toJson();
     }
     return data;
   }
