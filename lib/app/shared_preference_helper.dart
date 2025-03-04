@@ -61,9 +61,9 @@ class SharedPreferenceHelper {
   }
 
   Future<bool> isLoggedIn() async {
-    String? token = getToken() as String?;
+    String? token = await getToken();
     if(token != null) {
-      profileModel = getUserData() as ProfileModel?;
+      profileModel = await getUserData();
       return true;
     }
     return false;

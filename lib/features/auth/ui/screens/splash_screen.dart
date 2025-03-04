@@ -8,6 +8,7 @@ import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,18 +27,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _moveToNextScreen() async {
-    String? token = await SharedPreferenceHelper.getToken();
-    if (token!= null) {
-      if(mounted){
-        Navigator.pushReplacementNamed(context, MainBottomNavigationBarScreen.name);
+    await Future.delayed(const Duration(seconds: 2));
+    final sharedPrefs = SharedPreferenceHelper();
+    if (await sharedPrefs.isLoggedIn()) {
+      if (mounted) {
+        Navigator.pushReplacementNamed(
+            context, MainBottomNavigationBarScreen.name);
       }
     } else {
-      if(mounted){
+      if (mounted) {
         Navigator.pushNamed(context, SignInScreen.name);
       }
     }
-    await Future.delayed(const Duration(seconds: 2));
-
   }
 
   @override
