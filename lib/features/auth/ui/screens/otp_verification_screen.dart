@@ -2,8 +2,14 @@ import 'dart:async';
 
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/app_constant.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/controllers/auth_controller.dart';
 import 'package:ecommerce/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
+import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -20,6 +26,7 @@ class OtpVerificationScreen extends StatefulWidget {
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AuthController _authController = Get.find<AuthController>();
   int _secondsRemaining = AppConstants.resendOtpTimeoutSeconds;
   bool _enableResend = false;
   late Timer? _timer;
@@ -98,10 +105,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   appContext: context,
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _onOtpButtonPressed,
-                  child: const Text('Next'),
-                ),
+                GetBuilder<AuthController>(builder: (controller) {
+                  if (controller.inProgress) {
+                    return const Center(
+                      child: const MyLoadingIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: _onOtpButtonPressed,
+                    child: const Text('Next'),
+                  );
+                }),
                 const SizedBox(height: 32),
                 Column(
                   children: [
@@ -156,10 +170,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  _onOtpButtonPressed() {
+  Future<void> _onOtpButtonPressed() async {
     if (_formKey.currentState!.validate()) {
-      print('OTP: ${_otpController.text}');
-      Navigator.pushNamed(context, CompleteProfileScreen.name);
+      bool isSuccess = await _authController.verifyOtp(_otpController.text);
+      if (isSuccess) {
+        if (_authController.shouldNavigate) {
+          MySnackBar.show(
+            title: "OTP Verified",
+            message: 'You have successfully created a new new account.',
+            type: SnackBarType.success,
+          );
+          if (mounted) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              MainBottomNavigationBarScreen.name,
+              (_) => false,
+            );
+          }
+        }
+      } else {
+        MySnackBar.show(
+          title: "Verification Failed",
+          message: _authController.errorMessage,
+          type: SnackBarType.error,
+        );
+      }
     }
   }
 

@@ -1,6 +1,8 @@
 import 'package:ecommerce/app/assets_path.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/ui/screens/email_verification_screen.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
@@ -24,8 +26,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _moveToNextScreen() async {
+    String? token = await SharedPreferenceHelper.getToken();
+    if (token!= null) {
+      if(mounted){
+        Navigator.pushReplacementNamed(context, MainBottomNavigationBarScreen.name);
+      }
+    } else {
+      if(mounted){
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushNamed(context, MainBottomNavigationBarScreen.name);
+
   }
 
   @override

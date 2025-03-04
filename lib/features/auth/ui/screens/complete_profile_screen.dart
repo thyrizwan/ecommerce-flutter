@@ -161,11 +161,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
   _onOtpButtonPressed() {
     if (_formKey.currentState!.validate()) {
-      print('First Name: ${_firstNameTEController.text}');
-      print('Last Name: ${_lastNameTEController.text}');
-      print('Phone No.: ${_phoneNumberTEController.text}');
-      print('City: ${_cityTEController.text}');
-      print('Shipping Address: ${_shippingAddressTEController.text}');
+      // TODO: need to implement
+      // print('First Name: ${_firstNameTEController.text}');
+      // print('Last Name: ${_lastNameTEController.text}');
+      // print('Phone No.: ${_phoneNumberTEController.text}');
+      // print('City: ${_cityTEController.text}');
+      // print('Shipping Address: ${_shippingAddressTEController.text}');
     }
   }
 

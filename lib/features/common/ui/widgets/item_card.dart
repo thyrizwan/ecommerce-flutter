@@ -1,4 +1,6 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/model/profile_model.dart';
 import 'package:ecommerce/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +12,10 @@ class ProductItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: 1);
+        var det = await SharedPreferenceHelper.getUserData();
+        print(det?.firstName);
       },
       child: SizedBox(
         width: 145,

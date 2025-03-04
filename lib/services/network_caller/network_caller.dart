@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
@@ -20,14 +21,21 @@ class NetworkResponse {
 class NetworkCaller {
   final Logger _logger = Logger();
 
-  Future<NetworkResponse> getRequest(String url) async {
+  Future<NetworkResponse> getRequest(String url, {bool isAuth = false}) async {
     try {
       Uri uri = Uri.parse(url);
       _logRequest(url);
-      Response response = await get(uri);
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+      if (isAuth) {
+        var token = await SharedPreferenceHelper.getToken();
+        headers['token'] = token.toString();
+      }
+      Response response = await get(uri, headers: headers);
       _logResponse(url, response.statusCode, response.headers, response.body);
+      final decodedMessage = json.decode(response.body);
       if (response.statusCode == 200) {
-        final decodedMessage = json.decode(response.body);
         return NetworkResponse(
           isSuccess: true,
           statusCode: response.statusCode,
@@ -37,6 +45,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodedMessage['msg'],
         );
       }
     } catch (e) {
@@ -49,8 +58,8 @@ class NetworkCaller {
     }
   }
 
-  Future<NetworkResponse> postRequest(
-      String url, Map<String, dynamic> body) async {
+  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
+      {bool isAuth = false}) async {
     try {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
@@ -63,8 +72,8 @@ class NetworkCaller {
         headers: headers,
       );
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200) {
-        final decodedMessage = json.decode(response.body);
+      final decodedMessage = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return NetworkResponse(
           isSuccess: true,
           statusCode: response.statusCode,
@@ -74,6 +83,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodedMessage['msg'],
         );
       }
     } catch (e) {

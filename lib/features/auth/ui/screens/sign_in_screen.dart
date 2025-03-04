@@ -1,5 +1,14 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/controllers/auth_controller.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_up_screen.dart';
+import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
+import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -11,147 +20,145 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
+  final TextEditingController _passwordTEController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AuthController _authController = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Google and Facebook Login Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SocialLoginButton(
-                    icon: Icons.g_mobiledata,
-                    onTap: () {
-                      // TODO: Google login
-                    },
-                  ),
-                  SizedBox(width: 16),
-                  SocialLoginButton(
-                    icon: Icons.facebook,
-                    onTap: () {
-                      // TODO: Facebook login
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Email",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 4.0),
-                  const TextField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Email address",
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 10),
-
-              // Password Field
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Password",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 4.0),
-                  const TextField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Password",
-                    ),
-                    obscureText: true,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
-
-              // Login Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // TODO: login action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Text(
-                    "Log In",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 80),
+                const AppLogoWidget(),
+                const SizedBox(height: 32),
+                Text(
+                  'Welcome Back',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-              ),
-
-              SizedBox(height: 16),
-
-              // Sign Up Text
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: TextStyle(color: Colors.grey.shade400),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // TODO: Sign Up navigation
-                    },
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                const SizedBox(height: 30),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _emailTEController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                      prefixIcon: Icon(Icons.email),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(value!)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    }),
+                const SizedBox(height: 16),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _passwordTEController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                      prefixIcon: Icon(Icons.key),
+                    ),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your password';
+                      }
+                      if (value!.length < 6) {
+                        return 'Password must be at least 6 characters long';
+                      }
+                      if (value.length > 40) {
+                        return 'Password must be within 40 characters';
+                      }
+                      return null;
+                    }),
+                const SizedBox(height: 16),
+                GetBuilder<AuthController>(builder: (controller) {
+                  if (controller.inProgress) {
+                    return const Center(
+                      child: const MyLoadingIndicator(),
+                    );
+                  }
+                  return Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _onNextButtonPressed,
+                        child: const Text('Log In'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (mounted) {
+                            Navigator.pushNamed(
+                              context,
+                              SignUpScreen.name,
+                            );
+                          }
+                        },
+                        child: const Text('Sign Up'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (mounted) {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              MainBottomNavigationBarScreen.name,
+                              (_) => false,
+                            );
+                          }
+                        },
+                        child: const Text('Skip to Next'),
+                      ),
+                    ],
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-}
 
-class SocialLoginButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const SocialLoginButton({required this.icon, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 56,
-        height: 56,
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(icon, size: 32, color: Colors.black),
-      ),
-    );
+  Future<void> _onNextButtonPressed() async {
+    if (_formKey.currentState!.validate()) {
+      var currentData = {
+        'email': _emailTEController.text,
+        'password': _passwordTEController.text,
+      };
+      bool isSuccess = await _authController.login(currentData);
+      if (isSuccess) {
+        var userInfo = await SharedPreferenceHelper.getUserData();
+        MySnackBar.show(
+          title: "Login Successful",
+          message: 'Welcome back! ${userInfo?.firstName} ${userInfo?.lastName}',
+          type: SnackBarType.success,
+        );
+        if (mounted) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            MainBottomNavigationBarScreen.name,
+            (_) => false,
+          );
+        }
+      } else {
+        MySnackBar.show(
+          title: "Login Failed",
+          message: _authController.errorMessage,
+          type: SnackBarType.error,
+        );
+      }
+    }
   }
 }

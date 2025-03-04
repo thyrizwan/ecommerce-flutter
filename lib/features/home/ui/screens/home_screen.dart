@@ -136,21 +136,21 @@ class _HomeScreenState extends State<HomeScreen> {
         AppBarIconButton(
           icon: Icons.person,
           onTap: () {
-            print('person');
+            // TODO: need to implement
           },
         ),
         const SizedBox(width: 6),
         AppBarIconButton(
           icon: Icons.call_rounded,
           onTap: () {
-            print('call');
+            // TODO: need to implement
           },
         ),
         const SizedBox(width: 6),
         AppBarIconButton(
           icon: Icons.notifications_active,
           onTap: () {
-            print('notification');
+            // TODO: need to implement
           },
         ),
       ],

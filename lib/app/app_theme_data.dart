@@ -62,7 +62,7 @@ class AppThemeData {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.snowyColor,
+          foregroundColor: AppColors.primaryColor,
           minimumSize: const Size.fromHeight(50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -70,7 +70,7 @@ class AppThemeData {
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: AppColors.snowyColor,
+            // color: AppColors.primaryColor,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16),
         )
