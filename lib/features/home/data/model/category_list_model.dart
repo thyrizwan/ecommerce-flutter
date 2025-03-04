@@ -1,32 +1,32 @@
-class BannerModel {
+class CategoryListModel {
   String? sId;
-  String? photoUrl;
+  String? title;
+  String? slug;
   String? description;
-  String? product;
-  String? brand;
-  Null category;
+  String? icon;
+  Null parent;
   String? createdAt;
   String? updatedAt;
   int? iV;
 
-  BannerModel(
+  CategoryListModel(
       {this.sId,
-      this.photoUrl,
+      this.title,
+      this.slug,
       this.description,
-      this.product,
-      this.brand,
-      this.category,
+      this.icon,
+      this.parent,
       this.createdAt,
       this.updatedAt,
       this.iV});
 
-  BannerModel.fromJson(Map<String, dynamic> json) {
+  CategoryListModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    photoUrl = json['photo_url'];
+    title = json['title'];
+    slug = json['slug'];
     description = json['description'];
-    product = json['product'];
-    brand = json['brand'];
-    category = json['category'];
+    icon = json['icon'];
+    parent = json['parent'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
@@ -35,11 +35,11 @@ class BannerModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
-    data['photo_url'] = photoUrl;
+    data['title'] = title;
+    data['slug'] = slug;
     data['description'] = description;
-    data['product'] = product;
-    data['brand'] = brand;
-    data['category'] = category;
+    data['icon'] = icon;
+    data['parent'] = parent;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['__v'] = iV;

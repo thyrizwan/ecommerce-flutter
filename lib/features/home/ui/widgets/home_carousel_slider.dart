@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/features/home/data/model/banner_model.dart';
+import 'package:ecommerce/features/home/data/model/banner_list_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
@@ -9,7 +9,7 @@ class HomeCarouselSlider extends StatefulWidget {
     required this.bannerList,
   });
 
-  final List<BannerModel> bannerList;
+  final List<BannerListModel> bannerList;
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
 }
