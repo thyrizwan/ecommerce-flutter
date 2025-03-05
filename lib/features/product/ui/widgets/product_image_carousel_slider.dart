@@ -67,7 +67,7 @@ class _ProductImageCarouselSliderState
                     Container(
                       width: 10,
                       height: 10,
-                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
                         color: value == i ? AppColors.babyColor : Colors.white,
                         borderRadius: BorderRadius.circular(20),

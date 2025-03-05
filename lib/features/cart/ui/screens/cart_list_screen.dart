@@ -91,7 +91,7 @@ class _CartListScreenState extends State<CartListScreen> {
                                 );
                               }
                               if (controller.cartItems.isEmpty) {
-                                return Center(child: Text("No items in cart"));
+                                return const Center(child: Text("No items in cart"));
                               }
                               return ListView.builder(
                                 itemCount: controller.cartItems.length,
@@ -126,24 +126,24 @@ class _CartListScreenState extends State<CartListScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "You are not logged in!",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(context, SignInScreen.name);
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 24, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Text("Login Now"),
+                          child: const Text("Login Now"),
                         ),
                       ],
                     ),
@@ -156,7 +156,7 @@ class _CartListScreenState extends State<CartListScreen> {
 
   Container _buildPriceAndAddToCartSection(TextTheme textTheme) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.snowyColor,
         borderRadius: BorderRadius.circular(20),
@@ -174,7 +174,7 @@ class _CartListScreenState extends State<CartListScreen> {
                 ),
                 Text(
                   '₹${controller.getTotalCartPrice().toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.softColor,
@@ -189,7 +189,7 @@ class _CartListScreenState extends State<CartListScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, OrderPlaceScreen.name);
               },
-              child: Text('Checkout'),
+              child: const Text('Checkout'),
             ),
           ),
         ],

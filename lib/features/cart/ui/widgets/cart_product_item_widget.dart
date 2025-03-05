@@ -75,10 +75,10 @@ class _CartProductItemState extends State<CartProductItem> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Row(
+                          const Row(
                             children: [
                               Text('Color: Red'),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text('Size: S'),
                             ],
                           )
@@ -89,7 +89,7 @@ class _CartProductItemState extends State<CartProductItem> {
                       onPressed: () {
                         _onCartItemRemoveTrigger(widget.cartMasterItem.id);
                       },
-                      icon: Icon(Icons.delete_outline),
+                      icon: const Icon(Icons.delete_outline),
                     ),
                   ],
                 ),
@@ -101,7 +101,7 @@ class _CartProductItemState extends State<CartProductItem> {
                     children: [
                       Text(
                         '₹${(widget.cartItem.currentPrice * _quantity).toStringAsFixed(2)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: AppColors.softColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w600),

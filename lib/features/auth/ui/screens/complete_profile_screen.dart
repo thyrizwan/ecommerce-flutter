@@ -46,7 +46,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 'Complete Profile',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              Text(
+              const Text(
                 'Get started with us along with your new profile',
                 style: TextStyle(
                   color: AppColors.darkColor,

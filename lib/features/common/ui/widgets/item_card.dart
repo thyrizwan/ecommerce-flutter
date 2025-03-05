@@ -34,7 +34,7 @@ class ProductItemWidget extends StatelessWidget {
                   height: 80,
                   // fit: BoxFit.cover,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.snowyColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
@@ -58,12 +58,12 @@ class ProductItemWidget extends StatelessWidget {
                       children: [
                         Text(
                           '₹${productListModel.currentPrice ?? 0}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Wrap(
+                        const Wrap(
                           children: [
                             Icon(
                               Icons.star,

@@ -42,7 +42,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My Orders')),
+      appBar: AppBar(title: const Text('My Orders')),
       body: RefreshIndicator(onRefresh: () async {
         await Get.find<GetOrderController>().fetchOrders();
       }, child: GetBuilder<GetOrderController>(
@@ -60,19 +60,19 @@ class _OrderListScreenState extends State<OrderListScreen> {
             );
           }
           if (controller.orders.isEmpty && _isLoggedIn) {
-            return Center(child: Text('No Orders Found'));
+            return const Center(child: Text('No Orders Found'));
           }
           return _isLoggedIn
               ? ListView.builder(
                   itemCount: controller.orders.length,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   itemBuilder: (context, index) {
                     final order = controller.orders[index];
                     return Card(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       color: AppColors.snowyColor,
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -169,7 +169,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                                 Text(
                                     'Ordered On: ${order.createdAt?.year}-${order.createdAt?.month}-${order.createdAt?.day} '
                                     '${order.createdAt?.hour}:${order.createdAt?.minute}',
-                                    style: TextStyle(color: Colors.blueGrey)),
+                                    style: const TextStyle(color: Colors.blueGrey)),
                               ],
                             ),
                           ],
@@ -184,24 +184,24 @@ class _OrderListScreenState extends State<OrderListScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "You are not logged in!",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(context, SignInScreen.name);
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 24, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Text("Login Now"),
+                          child: const Text("Login Now"),
                         ),
                       ],
                     ),

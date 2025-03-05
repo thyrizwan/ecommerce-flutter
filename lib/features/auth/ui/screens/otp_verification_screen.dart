@@ -68,7 +68,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   'Enter OTP Code',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                Text(
+                const Text(
                   'We have sent a code to your email',
                   style: TextStyle(
                     color: AppColors.darkColor,
@@ -87,7 +87,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       fieldWidth: 40,
                       activeColor: AppColors.primaryColor,
                       inactiveColor: AppColors.lightColor),
-                  animationDuration: Duration(milliseconds: 300),
+                  animationDuration: const Duration(milliseconds: 300),
                   // backgroundColor: Colors.blue.shade50,
                   // enableActiveFill: true,
                   // errorAnimationController: errorController,
@@ -105,7 +105,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 GetBuilder<AuthController>(builder: (controller) {
                   if (controller.inProgress) {
                     return const Center(
-                      child: const MyLoadingIndicator(),
+                      child: MyLoadingIndicator(),
                     );
                   }
                   return ElevatedButton(
@@ -120,7 +120,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.access_time,
                                 color: Colors.grey,
                               ),
@@ -128,14 +128,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               RichText(
                                 text: TextSpan(
                                   text: 'Resend? Wait: ',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.grey,
                                   ),
                                   children: [
                                     TextSpan(
                                       text: '$_secondsRemaining seconds',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: AppColors.softColor,
                                       ),
                                     ),
@@ -146,11 +146,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           )
                         : TextButton.icon(
                             onPressed: _resendCode,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.refresh,
                               color: AppColors.softColor,
                             ), // Refresh icon
-                            label: Text(
+                            label: const Text(
                               'Resend Code',
                               style: TextStyle(
                                 color: AppColors.softColor,

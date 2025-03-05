@@ -33,11 +33,11 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        title: const Text('Profile'),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.settings))],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
               _buildListTile('Payment Methods'),
               _buildListTile('Order Preferences'),
             ]),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             _buildSection('GENERAL', [
               _buildListTile('Order History'),
               _buildListTile('Shipping & Delivery'),
@@ -57,9 +57,9 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
               _buildListTile('Customer Support'),
               _buildListTile('Legal & Policies'),
             ]),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Center(
-              child: _isLoggedIn ? LogOutWidget() : LogInWidget(),
+              child: _isLoggedIn ? const LogOutWidget() : const LogInWidget(),
             ),
           ],
         ),
@@ -70,15 +70,15 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
   Widget _buildProfileOverview() {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildRow('Total Orders', '56'),
             _buildRow('Membership Level', 'Gold'),
             ListTile(
-              title: Text('Membership Card'),
-              trailing: Icon(Icons.arrow_forward_ios),
+              title: const Text('Membership Card'),
+              trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {},
             ),
           ],
@@ -93,9 +93,9 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(fontSize: 16)),
+          Text(title, style: const TextStyle(fontSize: 16)),
           Text(value,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -109,7 +109,7 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
           ),
         ),
@@ -123,7 +123,7 @@ class _ProfileMenuListScreenState extends State<ProfileMenuListScreen> {
   Widget _buildListTile(String title) {
     return ListTile(
       title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () {
         MySnackBar.show(
             title: 'Under Development',

@@ -86,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 GetBuilder<AuthController>(builder: (controller) {
                   if (controller.inProgress) {
                     return const Center(
-                      child: const MyLoadingIndicator(),
+                      child: MyLoadingIndicator(),
                     );
                   }
                   return Column(

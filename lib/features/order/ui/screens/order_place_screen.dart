@@ -33,7 +33,7 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Place Order")),
+      appBar: AppBar(title: const Text("Place Order")),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
@@ -46,7 +46,7 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                 DropdownButtonFormField<String>(
                   value: selectedPaymentMethod,
                   decoration:
-                      InputDecoration(labelText: "Select Payment Method"),
+                      const InputDecoration(labelText: "Select Payment Method"),
                   items: paymentMethods.map((String method) {
                     return DropdownMenuItem<String>(
                       value: method,
@@ -61,32 +61,32 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                   validator: (value) =>
                       value == null ? "Please select a payment method" : null,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: fullNameController,
-                  decoration: InputDecoration(labelText: "Full Name"),
+                  decoration: const InputDecoration(labelText: "Full Name"),
                   validator: (value) =>
                       value!.isEmpty ? "Enter full name" : null,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: addressController,
-                  decoration: InputDecoration(labelText: "Address"),
+                  decoration: const InputDecoration(labelText: "Address"),
                   validator: (value) => value!.isEmpty ? "Enter address" : null,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: cityController,
-                  decoration: InputDecoration(labelText: "City"),
+                  decoration: const InputDecoration(labelText: "City"),
                   validator: (value) => value!.isEmpty ? "Enter city" : null,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                     controller: postalCodeController,
-                    decoration: InputDecoration(labelText: "Postal Code"),
+                    decoration: const InputDecoration(labelText: "Postal Code"),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -98,11 +98,11 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                       }
                       return null;
                     }),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: phoneController,
-                    decoration: InputDecoration(labelText: "Phone Number"),
+                    decoration: const InputDecoration(labelText: "Phone Number"),
                     keyboardType: TextInputType.phone,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -113,12 +113,12 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                       }
                       return null;
                     }),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _onPlaceOrderButtonPressed,
-                    child: Text("Place Order"),
+                    child: const Text("Place Order"),
                   ),
                 ),
               ],

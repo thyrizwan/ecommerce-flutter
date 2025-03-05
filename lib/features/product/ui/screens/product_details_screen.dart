@@ -135,7 +135,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ),
                                         Row(
                                           children: [
-                                            Row(
+                                            const Row(
                                               children: [
                                                 Icon(
                                                   Icons.star,
@@ -166,7 +166,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   },
                                                 );
                                               },
-                                              child: Text(
+                                              child: const Text(
                                                 'Reviews',
                                                 style: TextStyle(
                                                     color:
@@ -214,7 +214,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               Text('Unit Price', style: textTheme.titleMedium),
                               Text(
                                 '₹${productInfo.currentPrice}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 28, fontWeight: FontWeight.w800),
                               ),
                               const SizedBox(height: 16),
@@ -270,7 +270,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Container _buildPriceAndAddToCartSection(
       TextTheme textTheme, ProductListModel productInfo, int quantity) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.snowyColor,
         borderRadius: BorderRadius.circular(20),
@@ -287,7 +287,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               Text(
                 '₹${productInfo.currentPrice * quantity}',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.softColor),
@@ -300,7 +300,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               onPressed: () {
                 _onAddToCartBtnPressed(productInfo.id);
               },
-              child: Text('Add to Cart'),
+              child: const Text('Add to Cart'),
             ),
           ),
         ],
@@ -309,7 +309,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   _onAddToCartBtnPressed(String productId) async {
-    AddToCartController _addToCartController = Get.find<AddToCartController>();
+    AddToCartController addToCartController = Get.find<AddToCartController>();
     Map<String, dynamic> body = {
       "product": productId,
       "quantity": _selectedQuantity,
@@ -317,7 +317,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     final sharedPrefs = SharedPreferenceHelper();
     if (await sharedPrefs.isLoggedIn()) {
-      bool isSuccess = await _addToCartController.addToMyCart(body);
+      bool isSuccess = await addToCartController.addToMyCart(body);
 
       if (isSuccess) {
         MySnackBar.show(
@@ -328,7 +328,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       } else {
         MySnackBar.show(
           title: "Error adding",
-          message: _addToCartController.errorMessage,
+          message: addToCartController.errorMessage,
           type: SnackBarType.error,
         );
       }
@@ -345,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   _onAddToWishListBtnPressed(String productId) async {
-    AddToWishListController _addToWishListController =
+    AddToWishListController addToWishListController =
         Get.find<AddToWishListController>();
     Map<String, dynamic> body = {
       "product": productId,
@@ -353,7 +353,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     final sharedPrefs = SharedPreferenceHelper();
     if (await sharedPrefs.isLoggedIn()) {
-      bool isSuccess = await _addToWishListController.addToMyWishList(body);
+      bool isSuccess = await addToWishListController.addToMyWishList(body);
 
       if (isSuccess) {
         MySnackBar.show(
@@ -364,7 +364,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       } else {
         MySnackBar.show(
           title: "Error adding",
-          message: _addToWishListController.errorMessage,
+          message: addToWishListController.errorMessage,
           type: SnackBarType.error,
         );
       }

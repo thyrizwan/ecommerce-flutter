@@ -140,7 +140,7 @@ class _WishListScreenState extends State<WishListScreen> {
                       );
                     }
                     return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.98,
                           crossAxisSpacing: 1),
@@ -158,24 +158,24 @@ class _WishListScreenState extends State<WishListScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "You are not logged in!",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pushNamed(context, SignInScreen.name);
                             },
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 24, vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: Text("Login Now"),
+                            child: const Text("Login Now"),
                           ),
                         ],
                       ),

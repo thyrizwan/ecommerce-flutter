@@ -80,7 +80,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                         const SizedBox(height: 4.0),
                         TextFormField(
                           controller: _reviewController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Write Review",
                           ),
                           maxLines: 7,
@@ -97,7 +97,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   onPressed: () {
                     _onSubmit(widget.productId);
                   },
-                  child: Text("Submit Review"),
+                  child: const Text("Submit Review"),
                 ),
               ),
             ],

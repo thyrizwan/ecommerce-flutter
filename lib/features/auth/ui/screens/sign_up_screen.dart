@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'Complete Profile',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              Text(
+              const Text(
                 'Get started with us along with your new profile',
                 style: TextStyle(
                   color: AppColors.darkColor,
@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               GetBuilder<AuthController>(builder: (controller) {
                 if (controller.inProgress) {
                   return const Center(
-                    child: const MyLoadingIndicator(),
+                    child: MyLoadingIndicator(),
                   );
                 }
                 return ElevatedButton(

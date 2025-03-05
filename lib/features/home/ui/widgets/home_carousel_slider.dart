@@ -42,7 +42,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
                       color: AppColors.snowyColor,
                       borderRadius: BorderRadius.circular(8.0),
@@ -85,7 +85,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                   Container(
                     width: 10,
                     height: 10,
-                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 2.0),
                     decoration: BoxDecoration(
                       color: value == i
                           ? AppColors.babyColor

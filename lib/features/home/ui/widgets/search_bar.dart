@@ -13,7 +13,7 @@ class ProductSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Search',
         hintStyle: TextStyle(
           fontSize: 14,

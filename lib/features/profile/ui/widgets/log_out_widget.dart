@@ -25,7 +25,7 @@ class _LogOutWidgetState extends State<LogOutWidget> {
       onPressed: () async {
         await SharedPreferenceHelper.clearAllData();
         setState(() {});
-        Future.delayed(Duration(milliseconds: 500), () {
+        Future.delayed(const Duration(milliseconds: 500), () {
           if (mounted) {
             Navigator.pushNamedAndRemoveUntil(
               context,
@@ -37,9 +37,9 @@ class _LogOutWidgetState extends State<LogOutWidget> {
       },
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(Colors.red.shade100),
-        iconColor: WidgetStatePropertyAll(Colors.red),
+        iconColor: const WidgetStatePropertyAll(Colors.red),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(

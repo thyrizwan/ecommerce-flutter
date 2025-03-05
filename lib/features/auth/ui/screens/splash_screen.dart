@@ -37,17 +37,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
+              Spacer(),
               AppLogoWidget(),
-              const Spacer(),
-              const CircularProgressIndicator(),
+              Spacer(),
+              CircularProgressIndicator(),
             ],
           ),
         ),

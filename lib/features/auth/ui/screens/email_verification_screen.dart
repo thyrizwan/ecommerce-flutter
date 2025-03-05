@@ -85,7 +85,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 GetBuilder<AuthController>(builder: (controller) {
                   if (controller.inProgress) {
                     return const Center(
-                      child: const MyLoadingIndicator(),
+                      child: MyLoadingIndicator(),
                     );
                   }
                   return ElevatedButton(

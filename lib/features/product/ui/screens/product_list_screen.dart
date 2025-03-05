@@ -114,11 +114,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
               );
             }
             if (controller.productList.isEmpty) {
-              return Center(
+              return const Center(
                   child: Text("No products found for this category."));
             }
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.98,
                   crossAxisSpacing: 1),

@@ -20,9 +20,9 @@ class _LogInWidgetState extends State<LogInWidget> {
       },
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(Colors.blue.shade100),
-        iconColor: WidgetStatePropertyAll(Colors.blue),
+        iconColor: const WidgetStatePropertyAll(Colors.blue),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
