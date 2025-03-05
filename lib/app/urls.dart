@@ -14,5 +14,5 @@ class Urls {
   static String getProductListByCategoryUrl(String categoryId) => '$_baseUrl/products?category=$categoryId';
 
   static String getSingleProductInfoUrl(String productId) =>
-      '$_baseUrl/products/id/67c7c31a623a876bc4767038}';
+      '$_baseUrl/products/id/$productId';
 }

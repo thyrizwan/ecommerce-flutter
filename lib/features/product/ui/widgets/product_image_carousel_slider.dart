@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 
 class ProductImageCarouselSlider extends StatefulWidget {
   const ProductImageCarouselSlider({
-    super.key,
+    super.key, required this.imageUrls,
   });
+
+  final List<String> imageUrls;
 
   @override
   State<ProductImageCarouselSlider> createState() =>
@@ -15,12 +17,10 @@ class ProductImageCarouselSlider extends StatefulWidget {
 class _ProductImageCarouselSliderState
     extends State<ProductImageCarouselSlider> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
-  late List<int> _myList = [];
 
   @override
   void initState() {
     super.initState();
-    _myList = [1, 2, 3];
   }
 
   @override
@@ -37,19 +37,14 @@ class _ProductImageCarouselSliderState
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
               }),
-          items: _myList.map((i) {
+          items: widget.imageUrls.map((url) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.black12,
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Carousel $i',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
+                    image:  DecorationImage(image: NetworkImage(url)),
                   ),
                 );
               },
@@ -67,7 +62,7 @@ class _ProductImageCarouselSliderState
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < _myList.length; i++)
+                  for (int i = 0; i < widget.imageUrls.length; i++)
                     Container(
                       width: 10,
                       height: 10,
@@ -91,7 +86,6 @@ class _ProductImageCarouselSliderState
 
   @override
   void dispose() {
-    _myList;
     super.dispose();
   }
 }

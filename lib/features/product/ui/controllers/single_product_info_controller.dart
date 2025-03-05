@@ -1,5 +1,6 @@
 import 'package:ecommerce/app/urls.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
+import 'package:ecommerce/features/product/data/models/single_product_info_response_model.dart';
 import 'package:ecommerce/services/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,8 @@ class SingleProductInfoController extends GetxController{
   bool _inProgress = false;
   bool get isInProgress => _inProgress;
 
-  ProductListModel? _productInfo;
+  SingleProductInfoResponseModel? _productInfo;
+  ProductListModel get productInfo => _productInfo!.currentProductInfo;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
@@ -22,7 +24,7 @@ class SingleProductInfoController extends GetxController{
 
     if (response.isSuccess) {
       print(response.responseData);
-      _productInfo = ProductListModel.fromJson(response.responseData);
+      _productInfo = SingleProductInfoResponseModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
