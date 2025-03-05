@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/common/data/category_list_model.dart';
+import 'package:ecommerce/features/common/data/model/category_list_model.dart';
 
 class CategoryListDataModel {
   List<CategoryListModel>? categoryList;

@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/common/data/category_list_data_model.dart';
+import 'package:ecommerce/features/common/data/model/category_list_data_model.dart';
 
 class CategoryListResponseModel {
   int? code;

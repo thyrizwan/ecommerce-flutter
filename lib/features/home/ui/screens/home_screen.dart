@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
-import 'package:ecommerce/features/common/data/category_list_model.dart';
+import 'package:ecommerce/features/common/data/model/category_list_model.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
