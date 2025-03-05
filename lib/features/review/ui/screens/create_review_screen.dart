@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/review/ui/controllers/create_review_controller.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
@@ -21,6 +23,26 @@ class CreateReviewScreen extends StatefulWidget {
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _reviewController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeReviewScreen();
+  }
+
+  Future<void> _initializeReviewScreen() async {
+    final sharedPrefs = SharedPreferenceHelper();
+    if (!await sharedPrefs.isLoggedIn()) {
+      MySnackBar.show(
+        title: "Login Needed",
+        message: 'You need to login to perform this action',
+        type: SnackBarType.error,
+      );
+      if (mounted) {
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

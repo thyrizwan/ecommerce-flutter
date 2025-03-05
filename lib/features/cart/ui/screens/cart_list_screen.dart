@@ -1,7 +1,10 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce/features/cart/ui/controllers/get_carted_product_controller.dart';
 import 'package:ecommerce/features/cart/ui/widgets/cart_product_item_widget.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,11 +19,26 @@ class CartListScreen extends StatefulWidget {
 
 class _CartListScreenState extends State<CartListScreen> {
   @override
-  void initState() {
+  initState() {
     super.initState();
     Get.find<GetCartedProductController>().getMyCartItem();
     double totalPrice =
         Get.find<GetCartedProductController>().getTotalCartPrice();
+    _initializeReviewScreen();
+  }
+
+  Future<void> _initializeReviewScreen() async {
+    final sharedPrefs = SharedPreferenceHelper();
+    if (!await sharedPrefs.isLoggedIn()) {
+      MySnackBar.show(
+        title: "Login Needed",
+        message: 'You need to login to perform this action',
+        type: SnackBarType.error,
+      );
+      if (mounted) {
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
   }
 
   @override

@@ -278,6 +278,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         );
       }
     } else {
+      MySnackBar.show(
+        title: "Login Needed",
+        message: 'You need to login to perform this action',
+        type: SnackBarType.error,
+      );
       if (mounted) {
         Navigator.pushNamed(context, SignInScreen.name);
       }
@@ -309,6 +314,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         );
       }
     } else {
+      MySnackBar.show(
+        title: "Login Needed",
+        message: 'You need to login to perform this action',
+        type: SnackBarType.error,
+      );
       if (mounted) {
         Navigator.pushNamed(context, SignInScreen.name);
       }

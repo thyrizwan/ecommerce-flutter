@@ -48,8 +48,7 @@ class GetCartedProductController extends GetxController {
       update();
     }
   }
-
-  /// **Method to Get Total Price**
+  
   double getTotalCartPrice() {
     return _cartItems.fold(0, (sum, item) => sum + (item.currentPrice * item.quantity));
   }

@@ -1,4 +1,7 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/review/data/models/view_review_response_model.dart';
 import 'package:ecommerce/features/review/ui/controllers/view_review_controller.dart';
 import 'package:ecommerce/features/review/ui/screens/create_review_screen.dart';
@@ -18,7 +21,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<ViewReviewController>().getReviewList(widget.productId);
+    _initializeReviewScreen();
+  }
+
+  Future<void> _initializeReviewScreen() async {
+    final sharedPrefs = SharedPreferenceHelper();
+    if (await sharedPrefs.isLoggedIn()) {
+      Get.find<ViewReviewController>().getReviewList(widget.productId);
+    } else {
+      MySnackBar.show(
+        title: "Login Needed",
+        message: 'You need to login to perform this action',
+        type: SnackBarType.error,
+      );
+      if (mounted) {
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
   }
 
   @override
@@ -86,8 +105,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   Widget _buildReviewItem(ReviewModel model) {
     final user = model.user;
-    final fullName =
-    '${user?.firstName ?? 'Unknown'} ${user?.lastName ?? ''}'.trim(); // Handle null values
+    final fullName = '${user?.firstName ?? 'Unknown'} ${user?.lastName ?? ''}'
+        .trim(); // Handle null values
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -130,7 +149,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ],
           ),
           const SizedBox(height: 8),
-
         ],
       ),
     );
