@@ -7,7 +7,7 @@ class ProductListDataModel {
   final int? firstPage;
   final int? previous;
   final int? next;
-  final int lastPage;
+  final int? lastPage;
 
   ProductListDataModel({
     required this.productListData,
