@@ -5,7 +5,7 @@ import 'package:ecommerce/features/common/data/model/category_list_model.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
-import 'package:ecommerce/features/common/ui/controllers/product_list_by_category_controller.dart';
+import 'package:ecommerce/features/common/ui/controllers/home_screen_product_list_by_category_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/widgets/app_bar_icon_button.dart';
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onRefresh: () async {
           Get.find<CategoryListController>().getCategoryList();
           Get.find<HomeBannerListController>().getHomeBannerList();
-          Get.find<ProductListByCategoryController>()
+          Get.find<HomeScreenProductListByCategoryController>()
               .getProductByCategoryList();
         },
         child: SingleChildScrollView(
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                GetBuilder<ProductListByCategoryController>(
+                GetBuilder<HomeScreenProductListByCategoryController>(
                     builder: (controller) {
                   if (controller.isInProgress) {
                     return SingleChildScrollView(
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                GetBuilder<ProductListByCategoryController>(
+                GetBuilder<HomeScreenProductListByCategoryController>(
                     builder: (controller) {
                   if (controller.isInProgress) {
                     return SingleChildScrollView(
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                GetBuilder<ProductListByCategoryController>(
+                GetBuilder<HomeScreenProductListByCategoryController>(
                     builder: (controller) {
                   if (controller.isInProgress) {
                     return SingleChildScrollView(

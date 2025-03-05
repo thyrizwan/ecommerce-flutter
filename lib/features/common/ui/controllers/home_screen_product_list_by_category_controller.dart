@@ -4,7 +4,7 @@ import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/services/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
-class ProductListByCategoryController extends GetxController {
+class HomeScreenProductListByCategoryController extends GetxController {
   bool _inProgress = false;
   bool get isInProgress => _inProgress;
 

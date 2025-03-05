@@ -73,9 +73,9 @@ class TruShop extends StatelessWidget {
             widget = const CreateReviewScreen();
             break;
           case ProductDetailsScreen.name:
-            if (settings.arguments is int) {
+            if (settings.arguments is String) {
               widget =
-                  ProductDetailsScreen(productId: settings.arguments as int);
+                  ProductDetailsScreen(productId: settings.arguments as String);
             } else {
               widget = const MainBottomNavigationBarScreen();
             }

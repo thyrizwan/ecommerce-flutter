@@ -12,4 +12,6 @@ class Urls {
 
   static String getProductListUrl = '$_baseUrl/products';
 
+  static String getSingleProductInfoUrl(String productId) =>
+      '$_baseUrl/products/id/67c7c31a623a876bc4767038}';
 }

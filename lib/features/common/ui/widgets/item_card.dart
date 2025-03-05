@@ -17,9 +17,7 @@ class ProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: 1);
-        var det = await SharedPreferenceHelper.getUserData();
-        print(det?.firstName);
+        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: productListModel.id);
       },
       child: SizedBox(
         width: 145,
