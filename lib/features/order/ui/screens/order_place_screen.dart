@@ -134,7 +134,7 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
       var prefs = SharedPreferenceHelper();
       if (await prefs.isLoggedIn()) {
         Map<String, dynamic> requestBody = {
-          "payment_method": "cod",
+          "payment_method": selectedPaymentMethod,
           "shipping_address": ShippingAddressModel(
             fullName: fullNameController.text.trim(),
             address: addressController.text.trim(),
