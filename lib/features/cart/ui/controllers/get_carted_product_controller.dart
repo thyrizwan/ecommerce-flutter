@@ -8,7 +8,9 @@ class GetCartedProductController extends GetxController {
   bool get isInProgress => _inProgress;
 
   List<Product> _cartItems = [];
+  List<CartItem> _cartMasterItems = [];
   List<Product> get cartItems => _cartItems;
+  List<CartItem> get cartMasterItems => _cartMasterItems;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
@@ -25,6 +27,7 @@ class GetCartedProductController extends GetxController {
       try {
         CartListResponse cartResponse = CartListResponse.fromJson(response.responseData);
         _cartItems = cartResponse.results.map((cartItem) => cartItem.product).toList();
+        _cartMasterItems = cartResponse.results;
         isSuccess = true;
       } catch (e) {
         _errorMessage = "Data parsing error";

@@ -118,7 +118,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             GestureDetector(
                                               onTap: () {
                                                 Navigator.pushNamed(
-                                                    context, ReviewScreen.name);
+                                                  context,
+                                                  ReviewScreen.name,
+                                                  arguments: {
+                                                    'productId': productInfo.id
+                                                        .toString()
+                                                  },
+                                                );
                                               },
                                               child: Text(
                                                 'Reviews',

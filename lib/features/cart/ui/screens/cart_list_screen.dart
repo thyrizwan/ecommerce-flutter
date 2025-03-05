@@ -43,42 +43,49 @@ class _CartListScreenState extends State<CartListScreen> {
             icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Center(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                  child: GetBuilder<GetCartedProductController>(
-                    builder: (controller) {
-                      if (controller.isInProgress) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if (controller.cartItems.isEmpty) {
-                        return Center(child: Text("No items in cart"));
-                      }
-                      return ListView.builder(
-                        itemCount: controller.cartItems.length,
-                        itemBuilder: (context, index) {
-                          final cartItem = controller.cartItems[index];
-                          return CartProductItem(
-                            cartItem: cartItem,
-                            onQuantityChange: (int noOfItem) {
-                              Get.find<GetCartedProductController>()
-                                  .updateCartItemQuantity(
-                                      cartItem.id, noOfItem);
-                            },
-                          );
-                        },
-                      );
-                    },
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await Get.find<GetCartedProductController>().getMyCartItem();
+            setState(() {});
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 16),
+                    child: GetBuilder<GetCartedProductController>(
+                      builder: (controller) {
+                        if (controller.isInProgress) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (controller.cartItems.isEmpty) {
+                          return Center(child: Text("No items in cart"));
+                        }
+                        return ListView.builder(
+                          itemCount: controller.cartItems.length,
+                          itemBuilder: (context, index) {
+                            final cartItem = controller.cartItems[index];
+                            return CartProductItem(
+                              cartMasterItem: controller.cartMasterItems[index],
+                              cartItem: cartItem,
+                              onQuantityChange: (int noOfItem) {
+                                Get.find<GetCartedProductController>()
+                                    .updateCartItemQuantity(
+                                        cartItem.id, noOfItem);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            _buildPriceAndAddToCartSection(textTheme),
-          ],
+              _buildPriceAndAddToCartSection(textTheme),
+            ],
+          ),
         ),
       ),
     );

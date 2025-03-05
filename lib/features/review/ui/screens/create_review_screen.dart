@@ -1,8 +1,16 @@
+import 'dart:math';
+
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
+import 'package:ecommerce/features/review/ui/controllers/create_review_controller.dart';
+import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CreateReviewScreen extends StatefulWidget {
-  const CreateReviewScreen({super.key});
+  final String productId;
+
+  const CreateReviewScreen({super.key, required this.productId});
 
   static const String name = "/create-review-screen";
 
@@ -12,8 +20,6 @@ class CreateReviewScreen extends StatefulWidget {
 
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _reviewController = TextEditingController();
 
   @override
@@ -43,37 +49,6 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "First Name",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 4.0),
-                        const TextField(
-                          decoration: InputDecoration(
-                            hintText: "Enter First Name",
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Last Name",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 4.0),
-                        const TextField(
-                          decoration: InputDecoration(
-                            hintText: "Enter Last Name",
-                          ),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +58,8 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 4.0),
-                        const TextField(
+                        TextFormField(
+                          controller: _reviewController,
                           decoration: InputDecoration(
                             hintText: "Write Review",
                           ),
@@ -99,7 +75,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Create New Review
+                    _onSubmit(widget.productId);
                   },
                   child: Text("Submit Review"),
                 ),
@@ -109,5 +85,39 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
         ),
       ),
     );
+  }
+
+  _onSubmit(String productId) async {
+    if (_formKey.currentState!.validate()) {
+      var tempData = {
+        "product": productId,
+        "comment": _reviewController.text.trim(),
+        "rating": 1 + Random().nextInt((5 - 1) + 1)
+      };
+      CreateReviewController createReviewController =
+          Get.find<CreateReviewController>();
+      bool isSuccess = await createReviewController.createReview(tempData);
+
+      if (isSuccess) {
+        MySnackBar.show(
+          title: "Review Created",
+          message: 'Review created successfully',
+          type: SnackBarType.success,
+        );
+        _reviewController.text='';
+      } else {
+        MySnackBar.show(
+          title: "Login Failed",
+          message: createReviewController.errorMessage,
+          type: SnackBarType.error,
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _reviewController.dispose();
+    super.dispose();
   }
 }

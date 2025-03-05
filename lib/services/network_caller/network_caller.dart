@@ -98,6 +98,43 @@ class NetworkCaller {
     }
   }
 
+  Future<NetworkResponse> deleteRequest(
+    String url,
+  ) async {
+    try {
+      Uri uri = Uri.parse(url);
+      _logRequest(url);
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+      var token = await SharedPreferenceHelper.getToken();
+      headers['token'] = token.toString();
+      Response response = await delete(uri, headers: headers);
+      _logResponse(url, response.statusCode, response.headers, response.body);
+      final decodedMessage = json.decode(response.body);
+      if (response.statusCode == 200) {
+        return NetworkResponse(
+          isSuccess: true,
+          statusCode: response.statusCode,
+          responseData: decodedMessage,
+        );
+      } else {
+        return NetworkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMessage: decodedMessage['msg'],
+        );
+      }
+    } catch (e) {
+      _logResponse(url, -1, null, '', e.toString());
+      return NetworkResponse(
+        isSuccess: false,
+        statusCode: -1,
+        errorMessage: "Network error: $e",
+      );
+    }
+  }
+
   void _logRequest(
     String url, [
     Map<String, String>? header,

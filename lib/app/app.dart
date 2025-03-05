@@ -75,10 +75,22 @@ class TruShop extends StatelessWidget {
             }
             break;
           case ReviewScreen.name:
-            widget = const ReviewScreen();
+            if (settings.arguments is Map<String, dynamic>) {
+              final args = settings.arguments as Map<String, dynamic>;
+              final productId = args['productId'] as String;
+              widget = ReviewScreen(productId: productId);
+            } else {
+              widget = const MainBottomNavigationBarScreen();
+            }
             break;
           case CreateReviewScreen.name:
-            widget = const CreateReviewScreen();
+            if (settings.arguments is Map<String, dynamic>) {
+              final args = settings.arguments as Map<String, dynamic>;
+              final productId = args['productId'] as String;
+              widget = CreateReviewScreen(productId: productId);
+            } else {
+              widget = const MainBottomNavigationBarScreen();
+            }
             break;
           case ProductDetailsScreen.name:
             if (settings.arguments is String) {
