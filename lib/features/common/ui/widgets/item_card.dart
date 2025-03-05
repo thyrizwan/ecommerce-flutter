@@ -49,7 +49,7 @@ class ProductItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      productListModel.title,
+                      productListModel.title??'',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -58,7 +58,7 @@ class ProductItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '₹${productListModel.currentPrice}',
+                          '₹${productListModel.currentPrice??0}',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,

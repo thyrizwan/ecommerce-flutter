@@ -65,6 +65,8 @@ class NetworkCaller {
       Map<String, String> headers = {
         'Content-Type': 'application/json',
       };
+      var token = await SharedPreferenceHelper.getToken();
+      headers['token'] = token.toString();
       _logRequest(url, headers, body);
       Response response = await post(
         uri,

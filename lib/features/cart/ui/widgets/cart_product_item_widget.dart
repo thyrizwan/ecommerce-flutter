@@ -1,13 +1,37 @@
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
+import 'package:ecommerce/features/cart/data/models/cart_item_model.dart';
 import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:flutter/material.dart';
 
-class CartProductItem extends StatelessWidget {
+class CartProductItem extends StatefulWidget {
   const CartProductItem({
     super.key,
+    required this.cartItem,
+    required this.onQuantityChange,
   });
 
+  final Product cartItem;
+  final Function(int) onQuantityChange;
+
+  @override
+  State<CartProductItem> createState() => _CartProductItemState();
+}
+
+class _CartProductItemState extends State<CartProductItem> {
+  int _quantity = 1;
+  @override
+  void initState() {
+    super.initState();
+    _quantity = widget.cartItem.quantity ?? 1;
+  }
+
+  void _updateQuantity(int newQuantity) {
+    setState(() {
+      _quantity = newQuantity;
+    });
+    widget.onQuantityChange(newQuantity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +42,10 @@ class CartProductItem extends StatelessWidget {
       color: AppColors.snowyColor,
       child: Row(
         children: [
-          Image.asset(
-            AssetsPath.itemImagePath,
+          Image.network(
+            widget.cartItem.photos.isNotEmpty
+                ? widget.cartItem.photos[0]
+                : 'https://www.imrizwan.in/images/avatar.jpg',
             width: 90,
             height: 90,
             fit: BoxFit.scaleDown,
@@ -32,9 +58,10 @@ class CartProductItem extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'PRODUCT name Will be print here, you can write',
+                            widget.cartItem.title,
                             maxLines: 1,
                             style: textTheme.titleMedium?.copyWith(
                               overflow: TextOverflow.ellipsis,
@@ -63,13 +90,17 @@ class CartProductItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '₹100',
+                        '₹${(widget.cartItem.currentPrice * _quantity).toStringAsFixed(2)}',
                         style: TextStyle(
                             color: AppColors.softColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
-                      ProductQuantityIncDecButton(onChange: (int noOfItem) {})
+                      ProductQuantityIncDecButton(
+                        onChange: (int noOfItem) {
+                          _updateQuantity(noOfItem);
+                        },
+                      )
                     ],
                   ),
                 )

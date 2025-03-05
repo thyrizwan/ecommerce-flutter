@@ -1,4 +1,5 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/features/cart/ui/controllers/get_carted_product_controller.dart';
 import 'package:ecommerce/features/cart/ui/widgets/cart_product_item_widget.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,14 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<GetCartedProductController>().getMyCartItem();
+    double totalPrice =
+        Get.find<GetCartedProductController>().getTotalCartPrice();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -41,10 +50,28 @@ class _CartListScreenState extends State<CartListScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                  child: ListView.builder(
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return CartProductItem();
+                  child: GetBuilder<GetCartedProductController>(
+                    builder: (controller) {
+                      if (controller.isInProgress) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      if (controller.cartItems.isEmpty) {
+                        return Center(child: Text("No items in cart"));
+                      }
+                      return ListView.builder(
+                        itemCount: controller.cartItems.length,
+                        itemBuilder: (context, index) {
+                          final cartItem = controller.cartItems[index];
+                          return CartProductItem(
+                            cartItem: cartItem,
+                            onQuantityChange: (int noOfItem) {
+                              Get.find<GetCartedProductController>()
+                                  .updateCartItemQuantity(
+                                      cartItem.id, noOfItem);
+                            },
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
@@ -67,23 +94,25 @@ class _CartListScreenState extends State<CartListScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Total Price',
-                style: textTheme.titleSmall,
-              ),
-              Text(
-                '₹100',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.softColor,
+          GetBuilder<GetCartedProductController>(builder: (controller) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Total Price',
+                  style: textTheme.titleSmall,
                 ),
-              ),
-            ],
-          ),
+                Text(
+                  '₹${controller.getTotalCartPrice().toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.softColor,
+                  ),
+                ),
+              ],
+            );
+          }),
           SizedBox(
             width: 140,
             child: ElevatedButton(

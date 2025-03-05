@@ -15,4 +15,9 @@ class Urls {
 
   static String getSingleProductInfoUrl(String productId) =>
       '$_baseUrl/products/id/$productId';
+
+  static String addToCartUrl = '$_baseUrl/cart';
+  static String getCartedProductUrl = '$_baseUrl/cart';
+  static String addToWishListUrl = '$_baseUrl/wishlist';
+  static String getWishListProductListUrl = '$_baseUrl/wishlist';
 }

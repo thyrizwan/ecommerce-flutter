@@ -1,13 +1,20 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/shared_preference_helper.dart';
+import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
+import 'package:ecommerce/features/cart/ui/controllers/add_to_cart_controller.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
+import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/product/ui/controllers/single_product_info_controller.dart';
 import 'package:ecommerce/features/product/ui/widgets/color_picker_widget.dart';
 import 'package:ecommerce/features/product/ui/widgets/product_image_carousel_slider.dart';
 import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:ecommerce/features/product/ui/widgets/size_picker_widget.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
+import 'package:ecommerce/features/wishlist/ui/controllers/add_to_wish_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId});
@@ -123,18 +130,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Icon(
-                                                Icons.favorite_border,
-                                                size: 16,
-                                                color: Colors.white,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: AppColors.primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
+                                            GestureDetector(
+                                              onTap: () {
+                                                _onAddToWishListBtnPressed(
+                                                    productInfo.id);
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: Icon(
+                                                  Icons.favorite_border,
+                                                  size: 16,
+                                                  color: Colors.white,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                ),
                                               ),
                                             )
                                           ],
@@ -223,12 +236,76 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
             width: 140,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _onAddToCartBtnPressed(productInfo.id);
+              },
               child: Text('Add to Cart'),
             ),
           ),
         ],
       ),
     );
+  }
+
+  _onAddToCartBtnPressed(String productId) async {
+    AddToCartController _addToCartController = Get.find<AddToCartController>();
+    Map<String, dynamic> body = {
+      "product": productId,
+      "quantity": _selectedQuantity,
+    };
+
+    final sharedPrefs = SharedPreferenceHelper();
+    if (await sharedPrefs.isLoggedIn()) {
+      bool isSuccess = await _addToCartController.addToMyCart(body);
+
+      if (isSuccess) {
+        MySnackBar.show(
+          title: "Product in Cart",
+          message: 'Product successfully added to cart',
+          type: SnackBarType.success,
+        );
+      } else {
+        MySnackBar.show(
+          title: "Error adding",
+          message: _addToCartController.errorMessage,
+          type: SnackBarType.error,
+        );
+      }
+    } else {
+      if (mounted) {
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
+  }
+
+  _onAddToWishListBtnPressed(String productId) async {
+    AddToWishListController _addToWishListController =
+        Get.find<AddToWishListController>();
+    Map<String, dynamic> body = {
+      "product": productId,
+    };
+
+    final sharedPrefs = SharedPreferenceHelper();
+    if (await sharedPrefs.isLoggedIn()) {
+      bool isSuccess = await _addToWishListController.addToMyWishList(body);
+
+      if (isSuccess) {
+        MySnackBar.show(
+          title: "Product as Favourite",
+          message: 'Product added to wish list',
+          type: SnackBarType.success,
+        );
+      } else {
+        MySnackBar.show(
+          title: "Error adding",
+          message: _addToWishListController.errorMessage,
+          type: SnackBarType.error,
+        );
+      }
+    } else {
+      if (mounted) {
+        Navigator.pushNamed(context, SignInScreen.name);
+      }
+    }
   }
 }

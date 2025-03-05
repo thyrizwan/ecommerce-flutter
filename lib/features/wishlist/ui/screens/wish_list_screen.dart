@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/item_card.dart';
+import 'package:ecommerce/features/wishlist/ui/controllers/wish_list_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,13 @@ class WishListScreen extends StatefulWidget {
 }
 
 class _WishListScreenState extends State<WishListScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<WishListProductController>().getWishListProductList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -34,13 +42,20 @@ class _WishListScreenState extends State<WishListScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 0.98, crossAxisSpacing: 1),
-            itemCount: 30,
-            itemBuilder: (context, index) {
-              // return ProductItemWidget();
-            },
+          child: GetBuilder<WishListProductController>(
+            builder: (controller) {
+              if(controller.isInProgress){
+                return Center(child: CircularProgressIndicator());
+              }
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, childAspectRatio: 0.98, crossAxisSpacing: 1),
+                itemCount: controller.mappedProductList.length,
+                itemBuilder: (context, index) {
+                  return ProductItemWidget(productListModel: controller.mappedProductList[index]);
+                },
+              );
+            }
           ),
         ),
       ),
