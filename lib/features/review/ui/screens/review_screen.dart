@@ -7,6 +7,7 @@ import 'package:ecommerce/features/review/ui/controllers/view_review_controller.
 import 'package:ecommerce/features/review/ui/screens/create_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ReviewScreen extends StatefulWidget {
   final String productId;
@@ -63,7 +64,26 @@ class _ReviewScreenState extends State<ReviewScreen> {
         child: GetBuilder<ViewReviewController>(
           builder: (controller) {
             if (controller.isInProgress) {
-              return const Center(child: CircularProgressIndicator());
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView.builder(
+                  itemCount: 6,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Row(
+                        children: [
+                          _buildShimmerBox(80, 80),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: _buildShimmerBox(double.infinity, 80),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              );
             }
 
             if (controller.reviewList.isEmpty) {
@@ -186,6 +206,21 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildShimmerBox(double width, double height) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade50,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(6),
+        ),
       ),
     );
   }

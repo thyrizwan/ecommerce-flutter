@@ -15,6 +15,7 @@ import 'package:ecommerce/features/wishlist/ui/controllers/add_to_wish_controlle
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId});
@@ -61,7 +62,48 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         },
         child: GetBuilder<SingleProductInfoController>(builder: (controller) {
           if (controller.isInProgress) {
-            return Center(child: CircularProgressIndicator());
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildShimmerBox(double.infinity, 200),
+                  const SizedBox(height: 10),
+                  _buildShimmerBox(double.infinity, 30),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      _buildShimmerBox(200, 30),
+                      const SizedBox(width: 10),
+                      _buildShimmerBox(100, 30),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  _buildShimmerBox(200, 50),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      _buildShimmerBox(200, 30),
+                      const SizedBox(width: 10),
+                      _buildShimmerBox(100, 30),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      _buildShimmerBox(200, 30),
+                      const SizedBox(width: 10),
+                      _buildShimmerBox(100, 30),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  _buildShimmerBox(double.infinity, 30),
+                  const SizedBox(height: 10),
+                  _buildShimmerBox(double.infinity, 100),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            );
           }
 
           ProductListModel productInfo = controller.productInfo;
@@ -208,6 +250,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ],
           );
         }),
+      ),
+    );
+  }
+
+  Widget _buildShimmerBox(double width, double height) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade50,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(6),
+        ),
       ),
     );
   }
