@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/features/common/data/category_list_model.dart';
+import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/common/ui/controllers/product_list_by_category_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/widgets/app_bar_icon_button.dart';
@@ -38,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onRefresh: () async {
           Get.find<CategoryListController>().getCategoryList();
           Get.find<HomeBannerListController>().getHomeBannerList();
+          Get.find<ProductListByCategoryController>()
+              .getProductByCategoryList();
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -80,36 +84,63 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
-                ),
+                GetBuilder<ProductListByCategoryController>(
+                    builder: (controller) {
+                  if (controller.isInProgress) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildRowCategoryProductShimmerEffect(),
+                    );
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _getProductList(controller.popularProducts),
+                    ),
+                  );
+                }),
                 const SizedBox(height: 8),
                 HomeSectionHeader(
                   title: 'Special',
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
-                ),
+                GetBuilder<ProductListByCategoryController>(
+                    builder: (controller) {
+                  if (controller.isInProgress) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildRowCategoryProductShimmerEffect(),
+                    );
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _getProductList(controller.specialProducts),
+                    ),
+                  );
+                }),
                 const SizedBox(height: 8),
                 HomeSectionHeader(
                   title: 'New Arrival',
                   onTap: () {},
                 ),
                 const SizedBox(height: 8),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
-                ),
+                GetBuilder<ProductListByCategoryController>(
+                    builder: (controller) {
+                  if (controller.isInProgress) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildRowCategoryProductShimmerEffect(),
+                    );
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _getProductList(controller.newArrivalProducts),
+                    ),
+                  );
+                }),
                 const SizedBox(height: 16),
                 const Text(
                   'You reached the end.',
@@ -128,6 +159,252 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Row _buildRowCategoryProductShimmerEffect() {
+    return Row(
+      children: [
+        Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(width: 16),
+        Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(width: 16),
+        Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(width: 16),
+        Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade50,
+              child: Container(
+                width: 130,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade50,
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   List<Widget> _getCategoryList(List<CategoryListModel> categoryModel) {
     List<Widget> categoryList = [];
     for (int i = 0; i < categoryModel.length; i++) {
@@ -139,15 +416,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return categoryList;
   }
 
-  List<Widget> _getProductList() {
-    List<Widget> categoryList = [];
-    for (int i = 0; i < 10; i++) {
-      categoryList.add(Padding(
+  List<Widget> _getProductList(List<ProductListModel> productList) {
+    List<Widget> list = [];
+    int lengthProductList = productList.length;
+    for (int i = 0; i < lengthProductList; i++) {
+      list.add(Padding(
         padding: const EdgeInsets.only(right: 4.0),
-        child: ProductItemWidget(),
+        child: ProductItemWidget(productListModel: productList[i]),
       ));
     }
-    return categoryList;
+    return list;
   }
 
   AppBar _buildAppBar() {

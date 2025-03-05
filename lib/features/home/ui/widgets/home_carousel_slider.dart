@@ -58,6 +58,9 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                             Positioned.fill(
                               child: Image.network(
                                 banner.photoUrl ?? '',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset('assets/images/img.png');
+                                },
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),

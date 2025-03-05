@@ -39,7 +39,7 @@ class _WishListScreenState extends State<WishListScreen> {
                 crossAxisCount: 2, childAspectRatio: 0.98, crossAxisSpacing: 1),
             itemCount: 30,
             itemBuilder: (context, index) {
-              return ProductItemWidget();
+              // return ProductItemWidget();
             },
           ),
         ),

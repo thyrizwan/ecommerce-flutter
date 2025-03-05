@@ -32,7 +32,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           ),
           itemCount: 30,
           itemBuilder: (context, index) {
-            return ProductItemWidget();
+            // return ProductItemWidget();
           },
         ),
       ),

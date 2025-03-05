@@ -2,6 +2,7 @@ import 'package:ecommerce/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerce/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/common/ui/controllers/product_list_by_category_controller.dart';
 import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:ecommerce/features/wishlist/ui/screens/wish_list_screen.dart';
@@ -35,6 +36,7 @@ class _MainBottomNavigationBarScreenState
     super.initState();
     _homeBannerListController.getHomeBannerList();
     Get.find<CategoryListController>().getCategoryList();
+    Get.find<ProductListByCategoryController>().getProductByCategoryList();
   }
 
   @override

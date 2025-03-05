@@ -9,4 +9,7 @@ class Urls {
 
   static String getHomeBannerListUrl = '$_baseUrl/slides';
   static String getCategoryListUrl = '$_baseUrl/categories';
+
+  static String getProductListUrl = '$_baseUrl/products';
+
 }

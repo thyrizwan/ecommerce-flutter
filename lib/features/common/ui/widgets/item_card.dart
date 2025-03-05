@@ -1,13 +1,17 @@
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/model/profile_model.dart';
+import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductItemWidget extends StatelessWidget {
   const ProductItemWidget({
     super.key,
+    required this.productListModel,
   });
+
+  final ProductListModel productListModel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +31,11 @@ class ProductItemWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  'assets/images/item.png',
+                child: Image.network(
+                  productListModel.photos[0] ?? '',
                   width: 145,
-                  height: 80,
+                  height: 120,
+                  // fit: BoxFit.cover,
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.snowyColor,
@@ -44,9 +48,10 @@ class ProductItemWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Item Some long text will be here',
+                      productListModel.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -55,7 +60,7 @@ class ProductItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '₹999',
+                          '₹${productListModel.currentPrice}',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
@@ -69,7 +74,7 @@ class ProductItemWidget extends StatelessWidget {
                               size: 18,
                             ),
                             Text(
-                              '4.8',
+                              '0.0',
                               style: TextStyle(
                                 color: AppColors.primaryColor,
                                 fontWeight: FontWeight.bold,

@@ -1,0 +1,208 @@
+{
+    "code": 201,
+    "status": "success",
+    "msg": "Successfully added category",
+    "data": {
+        "title": "New Arrival",
+        "slug": "new-arr",
+        "description": "New Arrival Category description",
+        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png",
+        "parent": null,
+        "_id": "67c7bec4623a876bc4766fea",
+        "createdAt": "2025-03-05T03:02:28.234Z",
+        "updatedAt": "2025-03-05T03:02:28.234Z",
+        "__v": 0
+    }
+}
+{
+    "code": 201,
+    "status": "success",
+    "msg": "Successfully added brand",
+    "data": {
+        "title": "TUS",
+        "slug": "tus",
+        "description": "tus brand description",
+        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png",
+        "_id": "67c7bf6e623a876bc4766ff1",
+        "createdAt": "2025-03-05T03:05:18.357Z",
+        "updatedAt": "2025-03-05T03:05:18.357Z",
+        "__v": 0
+    }
+}
+
+{
+    "code": 201,
+    "status": "success",
+    "msg": "Successfully added product",
+    "data": {
+        "title": "TUS Product 1",
+        "brand": "67c7bf6e623a876bc4766ff1",
+        "categories": [
+            "67c7bec4623a876bc4766fea"
+        ],
+        "slug": "tus-product-1",
+        "meta_description": null,
+        "description": "cat description fgjh fgjh fj fj",
+        "photos": [],
+        "colors": [],
+        "sizes": [],
+        "tags": [],
+        "regular_price": null,
+        "current_price": 12000,
+        "quantity": 1,
+        "_id": "67c7bfd5623a876bc4766ff4",
+        "createdAt": "2025-03-05T03:07:01.075Z",
+        "updatedAt": "2025-03-05T03:07:01.075Z",
+        "__v": 0
+    }
+}
+
+
+{
+    "code": 200,
+    "status": "success",
+    "msg": "Successfully retrieved data",
+    "data": {
+        "results": [
+            {
+                "_id": "67c7c31a623a876bc4767038",
+                "title": "TUS Product 9",
+                "brand": {
+                    "_id": "67c7bf6e623a876bc4766ff1",
+                    "title": "TUS",
+                    "slug": "tus",
+                    "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                },
+                "categories": [
+                    {
+                        "_id": "6799c5d785b54cac3abec28f",
+                        "title": "New Category",
+                        "slug": "new-ca",
+                        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                    },
+                    {
+                        "_id": "67c35af85e8a445235de197b",
+                        "title": "Popular",
+                        "slug": "popular",
+                        "icon": "https://cdn-icons-png.freepik.com/256/12485/12485738.png?semt=ais_hybrid"
+                    },
+                    {
+                        "_id": "67c7bec4623a876bc4766fea",
+                        "title": "New Arrival",
+                        "slug": "new-arr",
+                        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                    }
+                ],
+                "slug": "tus-product-9",
+                "meta_description": null,
+                "description": "cat description fgjh fgjh fj fj",
+                "photos": [
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202501/26/KL3ZNGfgHubc8642.jpg",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202501/02/zDc3USjyFOIYnO3M.jpg",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/P9iQuoBXP9MSFAG2.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/9xpwKzGQvvCpSZd6.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/8GSbdJcv5EIXej07.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/aHKkrDjJY0AWXDLm.png"
+                ],
+                "colors": [
+                    "Red",
+                    "Blue",
+                    "Green",
+                    "Purple",
+                    "Gold"
+                ],
+                "sizes": [
+                    "XS",
+                    "S",
+                    "L",
+                    "XL",
+                    "XXL"
+                ],
+                "tags": [
+                    "new",
+                    "old",
+                    "medium",
+                    "high",
+                    "low"
+                ],
+                "regular_price": 18000,
+                "current_price": 12000,
+                "quantity": 1,
+                "createdAt": "2025-03-05T03:20:58.855Z",
+                "updatedAt": "2025-03-05T03:20:58.855Z"
+            },
+            {
+                "_id": "67c7c2f5623a876bc4767032",
+                "title": "TUS Product 8",
+                "brand": {
+                    "_id": "67c7bf6e623a876bc4766ff1",
+                    "title": "TUS",
+                    "slug": "tus",
+                    "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                },
+                "categories": [
+                    {
+                        "_id": "6799c5d785b54cac3abec28f",
+                        "title": "New Category",
+                        "slug": "new-ca",
+                        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                    },
+                    {
+                        "_id": "67c35af85e8a445235de197b",
+                        "title": "Popular",
+                        "slug": "popular",
+                        "icon": "https://cdn-icons-png.freepik.com/256/12485/12485738.png?semt=ais_hybrid"
+                    },
+                    {
+                        "_id": "67c7bec4623a876bc4766fea",
+                        "title": "New Arrival",
+                        "slug": "new-arr",
+                        "icon": "https://cdn.ostad.app/public/upload/2023-06-22T06-40-41.054Z-code-box-line.png"
+                    }
+                ],
+                "slug": "tus-product-8",
+                "meta_description": null,
+                "description": "cat description fgjh fgjh fj fj",
+                "photos": [
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202501/26/KL3ZNGfgHubc8642.jpg",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202501/02/zDc3USjyFOIYnO3M.jpg",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/P9iQuoBXP9MSFAG2.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/9xpwKzGQvvCpSZd6.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/8GSbdJcv5EIXej07.png",
+                    "https://opsg-img-cdn-gl.heytapimg.com/epb/202412/19/aHKkrDjJY0AWXDLm.png"
+                ],
+                "colors": [
+                    "Red",
+                    "Blue",
+                    "Green",
+                    "Purple",
+                    "Gold"
+                ],
+                "sizes": [
+                    "XS",
+                    "S",
+                    "L",
+                    "XL",
+                    "XXL"
+                ],
+                "tags": [
+                    "new",
+                    "old",
+                    "medium",
+                    "high",
+                    "low"
+                ],
+                "regular_price": null,
+                "current_price": 12000,
+                "quantity": 1,
+                "createdAt": "2025-03-05T03:20:21.066Z",
+                "updatedAt": "2025-03-05T03:20:21.066Z"
+            },
+        ],
+        "total": 62,
+        "first_page": null,
+        "previous": null,
+        "next": 2,
+        "last_page": 7
+    }
+}
