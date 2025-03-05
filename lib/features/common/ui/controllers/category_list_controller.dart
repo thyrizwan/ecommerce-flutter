@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class CategoryListController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   CategoryListResponseModel? _categoryListResponseModel;
@@ -14,6 +15,7 @@ class CategoryListController extends GetxController {
       _categoryListResponseModel?.categoryListDataModel?.categoryList ?? [];
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getCategoryList() async {
@@ -25,7 +27,8 @@ class CategoryListController extends GetxController {
         await Get.find<NetworkCaller>().getRequest(Urls.getCategoryListUrl);
 
     if (response.isSuccess) {
-      _categoryListResponseModel = CategoryListResponseModel.fromJson(response.responseData);
+      _categoryListResponseModel =
+          CategoryListResponseModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

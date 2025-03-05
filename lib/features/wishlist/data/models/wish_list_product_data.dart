@@ -20,8 +20,8 @@ class WishListProductData {
   factory WishListProductData.fromJson(Map<String, dynamic> json) {
     return WishListProductData(
       wishListProductResult: (json['results'] as List?)
-          ?.map((item) => WishListProductResult.fromJson(item))
-          .toList() ??
+              ?.map((item) => WishListProductResult.fromJson(item))
+              .toList() ??
           [],
       total: json['total'] ?? 0,
       firstPage: json['first_page'],

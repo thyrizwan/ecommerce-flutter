@@ -1,11 +1,9 @@
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/features/cart/data/models/cart_item_model.dart';
 import 'package:ecommerce/features/cart/ui/controllers/delete_from_cart_controller.dart';
 import 'package:ecommerce/features/cart/ui/controllers/get_carted_product_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
-import 'package:ecommerce/features/review/ui/controllers/create_review_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +27,7 @@ class CartProductItem extends StatefulWidget {
 
 class _CartProductItemState extends State<CartProductItem> {
   int _quantity = 1;
+
   @override
   void initState() {
     super.initState();

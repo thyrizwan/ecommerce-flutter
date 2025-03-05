@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class ProductImageCarouselSlider extends StatefulWidget {
   const ProductImageCarouselSlider({
-    super.key, required this.imageUrls,
+    super.key,
+    required this.imageUrls,
   });
 
   final List<String> imageUrls;
@@ -44,7 +45,7 @@ class _ProductImageCarouselSliderState
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.black12,
-                    image:  DecorationImage(image: NetworkImage(url)),
+                    image: DecorationImage(image: NetworkImage(url)),
                   ),
                 );
               },
@@ -68,11 +69,8 @@ class _ProductImageCarouselSliderState
                       height: 10,
                       margin: EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
-                        color: value == i
-                            ? AppColors.babyColor
-                            : Colors.white,
+                        color: value == i ? AppColors.babyColor : Colors.white,
                         borderRadius: BorderRadius.circular(20),
-
                       ),
                     ),
                 ],

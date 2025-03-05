@@ -4,14 +4,17 @@ import 'package:ecommerce/features/product/data/models/single_product_info_respo
 import 'package:ecommerce/services/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
-class SingleProductInfoController extends GetxController{
+class SingleProductInfoController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   SingleProductInfoResponseModel? _productInfo;
+
   ProductListModel get productInfo => _productInfo!.currentProductInfo;
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> fetchProductInfo(String productId) async {
@@ -19,12 +22,13 @@ class SingleProductInfoController extends GetxController{
     _inProgress = true;
     update();
 
-    final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.getSingleProductInfoUrl(productId));
+    final NetworkResponse response = await Get.find<NetworkCaller>()
+        .getRequest(Urls.getSingleProductInfoUrl(productId));
 
     if (response.isSuccess) {
       print(response.responseData);
-      _productInfo = SingleProductInfoResponseModel.fromJson(response.responseData);
+      _productInfo =
+          SingleProductInfoResponseModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

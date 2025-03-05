@@ -5,8 +5,10 @@ import 'package:ecommerce/features/cart/ui/controllers/get_carted_product_contro
 import 'package:ecommerce/features/cart/ui/widgets/cart_product_item_widget.dart';
 import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
+import 'package:ecommerce/features/order/ui/screens/order_place_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CartListScreen extends StatefulWidget {
   const CartListScreen({super.key});
@@ -18,27 +20,28 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+  bool _isLoggedIn = false;
+
   @override
-  initState() {
+  void initState() {
     super.initState();
-    Get.find<GetCartedProductController>().getMyCartItem();
-    double totalPrice =
-        Get.find<GetCartedProductController>().getTotalCartPrice();
-    _initializeReviewScreen();
+    _getData();
   }
 
-  Future<void> _initializeReviewScreen() async {
-    final sharedPrefs = SharedPreferenceHelper();
-    if (!await sharedPrefs.isLoggedIn()) {
+  _getData() async {
+    var sharedPref = SharedPreferenceHelper();
+    _isLoggedIn = await sharedPref.isLoggedIn();
+    if (_isLoggedIn) {
+      Get.find<GetCartedProductController>().getMyCartItem();
+      double totalPrice =
+          Get.find<GetCartedProductController>().getTotalCartPrice();
+    } else {
       MySnackBar.show(
-        title: "Login Needed",
-        message: 'You need to login to perform this action',
-        type: SnackBarType.error,
-      );
-      if (mounted) {
-        Navigator.pushNamed(context, SignInScreen.name);
-      }
+          title: 'Please Logged In',
+          type: SnackBarType.error,
+          message: 'You are not logged in.');
     }
+    setState(() {});
   }
 
   @override
@@ -66,47 +69,86 @@ class _CartListScreenState extends State<CartListScreen> {
             await Get.find<GetCartedProductController>().getMyCartItem();
             setState(() {});
           },
-          child: Column(
-            children: [
-              Expanded(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 16),
-                    child: GetBuilder<GetCartedProductController>(
-                      builder: (controller) {
-                        if (controller.isInProgress) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (controller.cartItems.isEmpty) {
-                          return Center(child: Text("No items in cart"));
-                        }
-                        return ListView.builder(
-                          itemCount: controller.cartItems.length,
-                          itemBuilder: (context, index) {
-                            final cartItem = controller.cartItems[index];
-                            return CartProductItem(
-                              cartMasterItem: controller.cartMasterItems[index],
-                              cartItem: cartItem,
-                              onItemRemoved: () {
-                                setState(() {});
-                              },
-                              onQuantityChange: (int noOfItem) {
-                                Get.find<GetCartedProductController>()
-                                    .updateCartItemQuantity(
-                                        cartItem.id, noOfItem);
-                              },
-                            );
+          child: _isLoggedIn
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 16),
+                          child: GetBuilder<GetCartedProductController>(
+                            builder: (controller) {
+                              if (controller.isInProgress) {
+                                return Column(
+                                  children: [
+                                    _buildShimmerBox(double.infinity, 130),
+                                    const SizedBox(height: 10),
+                                    _buildShimmerBox(double.infinity, 130),
+                                    const SizedBox(height: 10),
+                                    _buildShimmerBox(double.infinity, 130),
+                                  ],
+                                );
+                              }
+                              if (controller.cartItems.isEmpty) {
+                                return Center(child: Text("No items in cart"));
+                              }
+                              return ListView.builder(
+                                itemCount: controller.cartItems.length,
+                                itemBuilder: (context, index) {
+                                  final cartItem = controller.cartItems[index];
+                                  return CartProductItem(
+                                    cartMasterItem:
+                                        controller.cartMasterItems[index],
+                                    cartItem: cartItem,
+                                    onItemRemoved: () {
+                                      setState(() {});
+                                    },
+                                    onQuantityChange: (int noOfItem) {
+                                      Get.find<GetCartedProductController>()
+                                          .updateCartItemQuantity(
+                                              cartItem.id, noOfItem);
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    _buildPriceAndAddToCartSection(textTheme),
+                  ],
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "You are not logged in!",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignInScreen.name);
                           },
-                        );
-                      },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text("Login Now"),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              _buildPriceAndAddToCartSection(textTheme),
-            ],
-          ),
         ),
       ),
     );
@@ -144,11 +186,28 @@ class _CartListScreenState extends State<CartListScreen> {
           SizedBox(
             width: 140,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, OrderPlaceScreen.name);
+              },
               child: Text('Checkout'),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildShimmerBox(double width, double height) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade50,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(6),
+        ),
       ),
     );
   }

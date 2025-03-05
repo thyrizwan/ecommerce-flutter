@@ -1,3 +1,3 @@
-class AppConstants{
-  static const int resendOtpTimeoutSeconds= 59;
+class AppConstants {
+  static const int resendOtpTimeoutSeconds = 59;
 }

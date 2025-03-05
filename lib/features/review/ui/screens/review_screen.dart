@@ -11,7 +11,9 @@ import 'package:shimmer/shimmer.dart';
 
 class ReviewScreen extends StatefulWidget {
   final String productId;
+
   const ReviewScreen({super.key, required this.productId});
+
   static const String name = "/review-screen";
 
   @override

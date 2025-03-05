@@ -5,14 +5,18 @@ import 'package:get/get.dart';
 
 class GetCartedProductController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   List<Product> _cartItems = [];
   List<CartItem> _cartMasterItems = [];
+
   List<Product> get cartItems => _cartItems;
+
   List<CartItem> get cartMasterItems => _cartMasterItems;
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getMyCartItem() async {
@@ -20,13 +24,15 @@ class GetCartedProductController extends GetxController {
     _inProgress = true;
     update();
 
-    final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.getCartedProductUrl, isAuth: true);
+    final NetworkResponse response = await Get.find<NetworkCaller>()
+        .getRequest(Urls.getCartedProductUrl, isAuth: true);
 
     if (response.isSuccess) {
       try {
-        CartListResponse cartResponse = CartListResponse.fromJson(response.responseData);
-        _cartItems = cartResponse.results.map((cartItem) => cartItem.product).toList();
+        CartListResponse cartResponse =
+            CartListResponse.fromJson(response.responseData);
+        _cartItems =
+            cartResponse.results.map((cartItem) => cartItem.product).toList();
         _cartMasterItems = cartResponse.results;
         isSuccess = true;
       } catch (e) {
@@ -48,8 +54,9 @@ class GetCartedProductController extends GetxController {
       update();
     }
   }
-  
+
   double getTotalCartPrice() {
-    return _cartItems.fold(0, (sum, item) => sum + (item.currentPrice * item.quantity));
+    return _cartItems.fold(
+        0, (sum, item) => sum + (item.currentPrice * item.quantity));
   }
 }

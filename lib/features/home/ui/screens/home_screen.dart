@@ -1,23 +1,20 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/features/common/data/model/category_list_model.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/common/ui/controllers/category_list_controller.dart';
-import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerce/features/common/ui/controllers/home_screen_product_list_by_category_controller.dart';
-import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
+import 'package:ecommerce/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerce/features/common/ui/widgets/category_item_widget.dart';
+import 'package:ecommerce/features/common/ui/widgets/item_card.dart';
 import 'package:ecommerce/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:ecommerce/features/home/ui/widgets/app_bar_icon_button.dart';
-import 'package:ecommerce/features/common/ui/widgets/category_item_widget.dart';
 import 'package:ecommerce/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:ecommerce/features/home/ui/widgets/home_section_header.dart';
-import 'package:ecommerce/features/common/ui/widgets/item_card.dart';
 import 'package:ecommerce/features/home/ui/widgets/search_bar.dart';
+import 'package:ecommerce/features/profile/ui/screens/profile_menu_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -436,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen> {
         AppBarIconButton(
           icon: Icons.person,
           onTap: () {
-            // TODO: need to implement
+            Navigator.pushNamed(context, ProfileMenuListScreen.name);
           },
         ),
         const SizedBox(width: 6),

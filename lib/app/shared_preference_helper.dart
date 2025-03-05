@@ -62,15 +62,14 @@ class SharedPreferenceHelper {
 
   Future<bool> isLoggedIn() async {
     String? token = await getToken();
-    if(token != null) {
+    if (token != null) {
       profileModel = await getUserData();
       return true;
     }
     return false;
   }
 
-
-  Future<void> clearAllData() async {
+  static Future<void> clearAllData() async {
     await clearEmail();
     await clearToken();
     await clearUserData();

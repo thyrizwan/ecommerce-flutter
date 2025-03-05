@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:ecommerce/features/common/data/model/product_list_data_model.dart';
-
 
 class ProductListApiResponseModel {
   final int code;

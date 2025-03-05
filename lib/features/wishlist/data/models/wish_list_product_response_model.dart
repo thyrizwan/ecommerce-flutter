@@ -41,8 +41,8 @@ class WishListProductData {
   factory WishListProductData.fromJson(Map<String, dynamic> json) {
     return WishListProductData(
       wishListProductResult: (json['results'] as List?)
-          ?.map((item) => WishListProductResult.fromJson(item))
-          .toList() ??
+              ?.map((item) => WishListProductResult.fromJson(item))
+              .toList() ??
           [],
       total: json['total'] ?? 0,
       firstPage: json['first_page'],
@@ -71,7 +71,8 @@ class WishListProductResult {
   factory WishListProductResult.fromJson(Map<String, dynamic> json) {
     return WishListProductResult(
       id: json['_id'] ?? '',
-      wishListProductFinalList: WishListProductFinalList.fromJson(json['product'] ?? {}),
+      wishListProductFinalList:
+          WishListProductFinalList.fromJson(json['product'] ?? {}),
       user: json['user'] ?? '',
       createdAt: json['createdAt'] ?? '',
       updatedAt: json['updatedAt'] ?? '',
@@ -122,15 +123,15 @@ class WishListProductFinalList {
       title: json['title'] ?? '',
       brand: json['brand'] ?? '',
       categories:
-      (json['categories'] as List?)?.map((e) => e.toString()).toList() ??
-          [],
+          (json['categories'] as List?)?.map((e) => e.toString()).toList() ??
+              [],
       slug: json['slug'] ?? '',
       metaDescription: json['meta_description'],
       description: json['description'] ?? '',
       photos:
-      (json['photos'] as List?)?.map((e) => e.toString()).toList() ?? [],
+          (json['photos'] as List?)?.map((e) => e.toString()).toList() ?? [],
       colors:
-      (json['colors'] as List?)?.map((e) => e.toString()).toList() ?? [],
+          (json['colors'] as List?)?.map((e) => e.toString()).toList() ?? [],
       sizes: (json['sizes'] as List?)?.map((e) => e.toString()).toList() ?? [],
       tags: (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [],
       regularPrice: json['regular_price'] as int?,
@@ -141,9 +142,3 @@ class WishListProductFinalList {
     );
   }
 }
-
-
-
-
-
-

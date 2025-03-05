@@ -1,4 +1,3 @@
-import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/ui/controllers/auth_controller.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_up_screen.dart';
@@ -6,7 +5,6 @@ import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
-import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

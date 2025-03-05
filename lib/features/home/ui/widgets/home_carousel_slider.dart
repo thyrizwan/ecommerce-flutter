@@ -10,6 +10,7 @@ class HomeCarouselSlider extends StatefulWidget {
   });
 
   final List<BannerListModel> bannerList;
+
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
 }

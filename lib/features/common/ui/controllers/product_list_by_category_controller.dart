@@ -6,14 +6,16 @@ import 'package:get/get.dart';
 
 class ProductListByCategoryController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   ProductListApiResponseModel? _productListApiResponseModel;
 
   List<ProductListModel> get productList =>
-      _productListApiResponseModel?.productListData?.productListData??[];
+      _productListApiResponseModel?.productListData?.productListData ?? [];
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getProductByCategoryList(String categoryId) async {
@@ -21,11 +23,12 @@ class ProductListByCategoryController extends GetxController {
     _inProgress = true;
     update();
 
-    final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.getProductListByCategoryUrl(categoryId));
+    final NetworkResponse response = await Get.find<NetworkCaller>()
+        .getRequest(Urls.getProductListByCategoryUrl(categoryId));
 
     if (response.isSuccess) {
-      _productListApiResponseModel = ProductListApiResponseModel.fromJson(response.responseData);
+      _productListApiResponseModel =
+          ProductListApiResponseModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

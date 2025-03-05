@@ -1,11 +1,12 @@
 import 'package:ecommerce/app/urls.dart';
-import 'package:ecommerce/features/home/data/model/banner_list_response_model.dart';
 import 'package:ecommerce/features/home/data/model/banner_list_model.dart';
+import 'package:ecommerce/features/home/data/model/banner_list_response_model.dart';
 import 'package:ecommerce/services/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
 class HomeBannerListController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   BannerListResponseModel? _bannerListResponseModel;
@@ -14,6 +15,7 @@ class HomeBannerListController extends GetxController {
       _bannerListResponseModel?.bannerListDataModel?.bannerListData ?? [];
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getHomeBannerList() async {
@@ -25,7 +27,8 @@ class HomeBannerListController extends GetxController {
         await Get.find<NetworkCaller>().getRequest(Urls.getHomeBannerListUrl);
 
     if (response.isSuccess) {
-      _bannerListResponseModel = BannerListResponseModel.fromJson(response.responseData);
+      _bannerListResponseModel =
+          BannerListResponseModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

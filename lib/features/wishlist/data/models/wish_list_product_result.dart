@@ -18,7 +18,8 @@ class WishListProductResult {
   factory WishListProductResult.fromJson(Map<String, dynamic> json) {
     return WishListProductResult(
       id: json['_id'] ?? '',
-      wishListProductFinalList: WishListProductFinalList.fromJson(json['product'] ?? {}),
+      wishListProductFinalList:
+          WishListProductFinalList.fromJson(json['product'] ?? {}),
       user: json['user'] ?? '',
       createdAt: json['createdAt'] ?? '',
       updatedAt: json['updatedAt'] ?? '',

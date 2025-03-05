@@ -1,4 +1,3 @@
-
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 
 class ProductListDataModel {

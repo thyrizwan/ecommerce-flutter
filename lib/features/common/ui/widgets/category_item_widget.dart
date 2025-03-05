@@ -10,6 +10,7 @@ class CategoryItemWidget extends StatelessWidget {
   });
 
   final CategoryListModel categoryListModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

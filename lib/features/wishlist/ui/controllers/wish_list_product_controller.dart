@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class WishListProductController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   WishListProductResponseModel? _wishListProductListApiResponseModel;
@@ -52,6 +53,7 @@ class WishListProductController extends GetxController {
       }).toList();
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getWishListProductList() async {

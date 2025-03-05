@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class HomeScreenProductListByCategoryController extends GetxController {
   bool _inProgress = false;
+
   bool get isInProgress => _inProgress;
 
   ProductListApiResponseModel? _productListApiResponseModel;
@@ -16,6 +17,7 @@ class HomeScreenProductListByCategoryController extends GetxController {
   List<ProductListModel> newArrivalProducts = [];
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   Future<bool> getProductByCategoryList() async {

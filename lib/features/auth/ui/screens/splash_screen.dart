@@ -1,14 +1,8 @@
-import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/app/shared_preference_helper.dart';
-import 'package:ecommerce/features/auth/ui/screens/email_verification_screen.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
-import 'package:ecommerce/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
-import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -18,7 +18,8 @@ class SingleProductInfoResponseModel {
       code: json['code'] as int,
       status: json['status'] as String,
       msg: json['msg'] as String,
-      currentProductInfo: ProductListModel.fromJson(json['data'] as Map<String, dynamic>),
+      currentProductInfo:
+          ProductListModel.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 }

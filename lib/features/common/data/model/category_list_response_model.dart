@@ -6,7 +6,8 @@ class CategoryListResponseModel {
   String? msg;
   CategoryListDataModel? categoryListDataModel;
 
-  CategoryListResponseModel({this.code, this.status, this.msg, this.categoryListDataModel});
+  CategoryListResponseModel(
+      {this.code, this.status, this.msg, this.categoryListDataModel});
 
   CategoryListResponseModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];

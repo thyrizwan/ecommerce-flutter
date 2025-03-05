@@ -1,11 +1,9 @@
 import 'dart:math';
 
-import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/review/ui/controllers/create_review_controller.dart';
-import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -126,7 +124,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
           message: 'Review created successfully',
           type: SnackBarType.success,
         );
-        _reviewController.text='';
+        _reviewController.text = '';
       } else {
         MySnackBar.show(
           title: "Login Failed",

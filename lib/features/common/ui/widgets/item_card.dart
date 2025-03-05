@@ -1,6 +1,4 @@
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/app/shared_preference_helper.dart';
-import 'package:ecommerce/features/auth/model/profile_model.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
 import 'package:ecommerce/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +15,8 @@ class ProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: productListModel.id);
+        Navigator.pushNamed(context, ProductDetailsScreen.name,
+            arguments: productListModel.id);
       },
       child: SizedBox(
         width: 145,
@@ -49,7 +48,7 @@ class ProductItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      productListModel.title??'',
+                      productListModel.title ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -58,7 +57,7 @@ class ProductItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '₹${productListModel.currentPrice??0}',
+                          '₹${productListModel.currentPrice ?? 0}',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/app/urls.dart';
 import 'package:ecommerce/features/auth/model/profile_model.dart';
@@ -10,18 +8,23 @@ class AuthController extends GetxController {
   final NetworkCaller _networkCaller = Get.find<NetworkCaller>();
 
   bool _inProgress = false;
+
   bool get inProgress => _inProgress;
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   dynamic _tempData = '';
+
   dynamic get tempData => _tempData;
 
   ProfileModel? _profileModel;
+
   ProfileModel? get profileModel => _profileModel;
 
   bool _shouldNavigate = false;
+
   bool get shouldNavigate => _shouldNavigate;
 
   /*

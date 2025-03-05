@@ -3,18 +3,16 @@ import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce/features/cart/ui/controllers/add_to_cart_controller.dart';
 import 'package:ecommerce/features/common/data/model/product_list_model.dart';
-import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
+import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:ecommerce/features/product/ui/controllers/single_product_info_controller.dart';
 import 'package:ecommerce/features/product/ui/widgets/color_picker_widget.dart';
 import 'package:ecommerce/features/product/ui/widgets/product_image_carousel_slider.dart';
-import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:ecommerce/features/product/ui/widgets/size_picker_widget.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
 import 'package:ecommerce/features/wishlist/ui/controllers/add_to_wish_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductDetailsScreen extends StatefulWidget {

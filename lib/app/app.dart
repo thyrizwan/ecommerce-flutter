@@ -9,8 +9,11 @@ import 'package:ecommerce/features/auth/ui/screens/splash_screen.dart';
 import 'package:ecommerce/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerce/features/common/ui/screens/main_bottom_navigation_bar_screen.dart';
 import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
+import 'package:ecommerce/features/order/ui/screens/order_list_screen.dart';
+import 'package:ecommerce/features/order/ui/screens/order_place_screen.dart';
 import 'package:ecommerce/features/product/ui/screens/product_details_screen.dart';
 import 'package:ecommerce/features/product/ui/screens/product_list_screen.dart';
+import 'package:ecommerce/features/profile/ui/screens/profile_menu_list_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/create_review_screen.dart';
 import 'package:ecommerce/features/review/ui/screens/review_screen.dart';
 import 'package:ecommerce/features/wishlist/ui/screens/wish_list_screen.dart';
@@ -102,6 +105,30 @@ class TruShop extends StatelessWidget {
             break;
           case WishListScreen.name:
             widget = const WishListScreen();
+            break;
+          case CreateReviewScreen.name:
+            if (settings.arguments is String) {
+              widget =
+                  CreateReviewScreen(productId: settings.arguments as String);
+            } else {
+              widget = const MainBottomNavigationBarScreen();
+            }
+            break;
+          case ReviewScreen.name:
+            if (settings.arguments is String) {
+              widget = ReviewScreen(productId: settings.arguments as String);
+            } else {
+              widget = const MainBottomNavigationBarScreen();
+            }
+            break;
+          case OrderPlaceScreen.name:
+            widget = const OrderPlaceScreen();
+            break;
+          case OrderListScreen.name:
+            widget = const OrderListScreen();
+            break;
+          case ProfileMenuListScreen.name:
+            widget = const ProfileMenuListScreen();
             break;
           default:
             widget = const MainBottomNavigationBarScreen();

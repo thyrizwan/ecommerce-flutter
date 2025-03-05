@@ -24,7 +24,7 @@ class ViewReviewResponseModel {
 }
 
 class ViewReviewDataModel {
-    List<ReviewModel>? reviews;
+  List<ReviewModel>? reviews;
   int? totalReviews;
   dynamic firstPage;
   dynamic previousPage;

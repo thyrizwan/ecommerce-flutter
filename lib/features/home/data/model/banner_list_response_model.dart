@@ -6,13 +6,16 @@ class BannerListResponseModel {
   String? msg;
   BannerListDataModel? bannerListDataModel;
 
-  BannerListResponseModel({this.code, this.status, this.msg, this.bannerListDataModel});
+  BannerListResponseModel(
+      {this.code, this.status, this.msg, this.bannerListDataModel});
 
   BannerListResponseModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    bannerListDataModel = json['data'] != null ? BannerListDataModel.fromJson(json['data']) : null;
+    bannerListDataModel = json['data'] != null
+        ? BannerListDataModel.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

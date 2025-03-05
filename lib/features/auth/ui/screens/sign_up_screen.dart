@@ -1,11 +1,9 @@
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/app/shared_preference_helper.dart';
 import 'package:ecommerce/features/auth/ui/controllers/auth_controller.dart';
 import 'package:ecommerce/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:ecommerce/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_loading_indicator.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
-import 'package:ecommerce/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +11,7 @@ class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   static const String name = '/sign-up';
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -203,7 +202,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       };
       bool isSuccess = await _authController.signUp(userData);
       if (isSuccess) {
-
         MySnackBar.show(
           title: "OTP Send",
           message: _authController.tempData['msg'],
