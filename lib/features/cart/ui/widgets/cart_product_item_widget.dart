@@ -2,6 +2,7 @@ import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/app/assets_path.dart';
 import 'package:ecommerce/features/cart/data/models/cart_item_model.dart';
 import 'package:ecommerce/features/cart/ui/controllers/delete_from_cart_controller.dart';
+import 'package:ecommerce/features/cart/ui/controllers/get_carted_product_controller.dart';
 import 'package:ecommerce/features/common/ui/widgets/my_snack_bar.dart';
 import 'package:ecommerce/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:ecommerce/features/review/ui/controllers/create_review_controller.dart';
@@ -14,11 +15,13 @@ class CartProductItem extends StatefulWidget {
     required this.cartItem,
     required this.onQuantityChange,
     required this.cartMasterItem,
+    required this.onItemRemoved,
   });
 
   final CartItem cartMasterItem;
   final Product cartItem;
   final Function(int) onQuantityChange;
+  final VoidCallback onItemRemoved;
 
   @override
   State<CartProductItem> createState() => _CartProductItemState();
@@ -126,7 +129,8 @@ class _CartProductItemState extends State<CartProductItem> {
     bool isSuccess = await deleteCartController.deleteFromCart(productId);
 
     if (isSuccess) {
-      setState(() {});
+      widget.onItemRemoved();
+      Get.find<GetCartedProductController>().getMyCartItem();
       MySnackBar.show(
         title: "Removed",
         message: 'Review created successfully',

@@ -70,6 +70,9 @@ class _CartListScreenState extends State<CartListScreen> {
                             return CartProductItem(
                               cartMasterItem: controller.cartMasterItems[index],
                               cartItem: cartItem,
+                              onItemRemoved: () {
+                                setState(() {});
+                              },
                               onQuantityChange: (int noOfItem) {
                                 Get.find<GetCartedProductController>()
                                     .updateCartItemQuantity(
