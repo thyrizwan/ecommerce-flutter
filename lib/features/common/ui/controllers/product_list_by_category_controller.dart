@@ -22,7 +22,7 @@ class ProductListByCategoryController extends GetxController {
     update();
 
     final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.getProductListUrl);
+    await Get.find<NetworkCaller>().getRequest(Urls.getProductListByCategoryUrl(categoryId));
 
     if (response.isSuccess) {
       _productListApiResponseModel = ProductListApiResponseModel.fromJson(response.responseData);

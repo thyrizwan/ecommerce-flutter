@@ -17,7 +17,10 @@ class CategoryItemWidget extends StatelessWidget {
         Navigator.pushNamed(
           context,
           ProductListScreen.name,
-          arguments: categoryListModel.title,
+          arguments: {
+            'categoryName': categoryListModel.title,
+            'categoryId': categoryListModel.sId
+          },
         );
       },
       child: Column(
@@ -28,7 +31,12 @@ class CategoryItemWidget extends StatelessWidget {
               color: AppColors.snowyColor,
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Image.network(categoryListModel.icon ?? '', width: 40, height: 40, fit: BoxFit.scaleDown,),
+            child: Image.network(
+              categoryListModel.icon ?? '',
+              width: 40,
+              height: 40,
+              fit: BoxFit.scaleDown,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
@@ -36,11 +44,10 @@ class CategoryItemWidget extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: 14,
-              // letterSpacing: 1,
-              color: AppColors.secondaryColor.withOpacity(0.75),
-              overflow: TextOverflow.visible
-            ),
+                fontSize: 14,
+                // letterSpacing: 1,
+                color: AppColors.secondaryColor.withOpacity(0.75),
+                overflow: TextOverflow.visible),
           ),
         ],
       ),

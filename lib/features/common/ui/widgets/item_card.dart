@@ -32,7 +32,7 @@ class ProductItemWidget extends StatelessWidget {
                 child: Image.network(
                   productListModel.photos[0] ?? '',
                   width: 145,
-                  height: 120,
+                  height: 80,
                   // fit: BoxFit.cover,
                 ),
                 decoration: BoxDecoration(

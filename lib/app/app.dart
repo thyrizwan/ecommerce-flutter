@@ -59,9 +59,17 @@ class TruShop extends StatelessWidget {
             widget = const CategoryListScreen();
             break;
           case ProductListScreen.name:
-            if (settings.arguments is String) {
-              widget =
-                  ProductListScreen(categoryName: settings.arguments as String);
+            if (settings.arguments is Map<String, dynamic> &&
+                (settings.arguments as Map<String, dynamic>)['categoryName'] !=
+                    null &&
+                (settings.arguments as Map<String, dynamic>)['categoryId'] !=
+                    null) {
+              final args = settings.arguments as Map<String, dynamic>;
+
+              widget = ProductListScreen(
+                categoryName: args['categoryName']!,
+                categoryId: args['categoryId']!,
+              );
             } else {
               widget = const MainBottomNavigationBarScreen();
             }
